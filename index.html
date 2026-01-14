@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GABU ORIENT | Premium Mobile UI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- React & Babel CDNs -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Framer Motion CDN -->
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-serif {
+            font-family: 'Noto Serif JP', serif;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        @keyframes navDot {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .nav-dot {
+            animation: navDot 0.3s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useMemo } = React;
+        const { motion, AnimatePresence } = window.Motion;
+
+        // アイコンコンポーネントの簡易ラッパー
+        const Icon = ({ name, size = 20, className = "", strokeWidth = 2 }) => {
+            useEffect(() => {
+                lucide.createIcons();
+            }, [name]);
+            return <i data-lucide={name} className={className} style={{ width: size, height: size, strokeWidth }}></i>;
+        };
+
+        const PROPERTIES = [
+            {
+                id: 1,
+                type: 'rent',
+                status: 'NEW',
+                category: 'Apartment',
+                title: 'THE ORE MAIDASHI',
+                price: '125,000',
+                unit: '円/月',
+                location: '福岡市東区馬出',
+                station: '馬出九大病院前駅 徒歩3分',
+                size: '1LDK / 45.20㎡',
+                image: 'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&q=80&w=800',
+                tags: ['デザイナーズ', '角部屋']
+            },
+            {
+                id: 2,
+                type: 'sale',
+                status: 'FOR SALE',
+                category: 'Mansion',
+                title: 'OHORI PARK RESIDENCE',
+                price: '7,880',
+                unit: '万円',
+                location: '福岡市中央区大濠',
+                station: '大濠公園駅 徒歩5分',
+                size: '3LDK / 82.15㎡',
+                image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800',
+                tags: ['パークビュー', '免震']
+            },
+            {
+                id: 3,
+                type: 'rent',
+                status: 'RECOMMEND',
+                category: 'Apartment',
+                title: 'YAKUIN TERRACE',
+                price: '210,000',
+                unit: '円/月',
+                location: '福岡市中央区薬院',
+                station: '薬院駅 徒歩4分',
+                size: '2LDK / 65.50㎡',
+                image: 'https://images.unsplash.com/photo-1600607687940-4e524cb35a36?auto=format&fit=crop&q=80&w=800',
+                tags: ['ルーフテラス', '駅近']
+            },
+            {
+                id: 4,
+                type: 'sale',
+                status: 'EXCLUSIVE',
+                category: 'House',
+                title: 'MOMOCHI COAST HOUSE',
+                price: '1.2',
+                unit: '億円',
+                location: '福岡市早良区百道浜',
+                station: '百道浜バス停 徒歩2分',
+                size: '4LDK / 150.0㎡',
+                image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=800',
+                tags: ['海が見える', 'ガレージ']
+            }
+        ];
+
+        const BottomNav = ({ activeTab, setActiveTab }) => {
+            const tabs = [
+                { id: 'home', icon: 'home', label: 'ホーム' },
+                { id: 'search', icon: 'search', label: '探す' },
+                { id: 'fav', icon: 'heart', label: '保存済み' },
+                { id: 'contact', icon: 'mail', label: '相談' }
+            ];
+
+            return (
+                <nav className="fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur-md border-t border-gray-100 z-[100] px-4 pb-8 pt-3 flex justify-around items-center shadow-[0_-5px_20px_rgba(0,0,0,0.05)]">
+                    {tabs.map((tab) => (
+                        <button
+                            key={tab.id}
+                            onClick={() => setActiveTab(tab.id)}
+                            className={`relative flex flex-col items-center p-2 transition-all ${activeTab === tab.id ? 'text-black' : 'text-gray-300'}`}
+                        >
+                            <Icon name={tab.icon} size={22} strokeWidth={activeTab === tab.id ? 2.5 : 2} />
+                            <span className="text-[9px] mt-1 font-bold tracking-tighter">{tab.label}</span>
+                            {activeTab === tab.id && (
+                                <div className="absolute -top-1 w-1 h-1 bg-black rounded-full nav-dot"></div>
+                            )}
+                        </button>
+                    ))}
+                </nav>
+            );
+        };
+
+        const PropertyCard = ({ property, viewType }) => (
+            <div className={`group relative bg-white border border-gray-100 overflow-hidden rounded-xl shadow-sm transition-all ${viewType === 'grid' ? 'col-span-1' : 'col-span-2'}`}>
+                <div className={`relative ${viewType === 'grid' ? 'aspect-square' : 'aspect-[4/3]'} overflow-hidden`}>
+                    <img src={property.image} alt={property.title} className="w-full h-full object-cover" />
+                    <div className="absolute top-3 left-3 flex gap-2">
+                        <span className="bg-black/80 backdrop-blur-sm text-white text-[8px] font-black px-2 py-1 rounded-sm tracking-widest uppercase">
+                            {property.status}
+                        </span>
+                    </div>
+                    <button className="absolute top-3 right-3 p-2 bg-white/20 backdrop-blur-md rounded-full text-white">
+                        <Icon name="heart" size={16} />
+                    </button>
+                </div>
+
+                <div className="p-4 space-y-2">
+                    <div className="flex justify-between items-start">
+                        <div className="space-y-0.5">
+                            <p className="text-[9px] text-gray-400 font-bold uppercase tracking-widest">{property.location}</p>
+                            <h3 className="text-sm font-serif font-bold leading-tight line-clamp-1">{property.title}</h3>
+                        </div>
+                        <div className="text-right">
+                            <p className="text-sm font-black tracking-tighter">
+                                {property.price}<span className="text-[10px] ml-0.5 font-medium">{property.unit}</span>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div className="flex items-center text-[10px] text-gray-500 font-medium">
+                        <Icon name="map-pin" size={10} className="mr-1" />
+                        <span className="truncate">{property.station}</span>
+                    </div>
+
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                        {property.tags.map(tag => (
+                            <span key={tag} className="text-[8px] bg-gray-50 text-gray-500 px-2 py-0.5 rounded-full border border-gray-100">
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        );
+
+        const App = () => {
+            const [activeTab, setActiveTab] = useState('home');
+            const [viewType, setViewType] = useState('list');
+            const [scrolled, setScrolled] = useState(false);
+
+            useEffect(() => {
+                const handleScroll = () => setScrolled(window.scrollY > 50);
+                window.addEventListener('scroll', handleScroll);
+                lucide.createIcons();
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            return (
+                <div className="min-h-screen bg-[#FDFDFD] text-zinc-900 font-sans pb-32">
+                    <header className={`fixed top-0 left-0 w-full z-[110] px-6 transition-all duration-500 ${scrolled ? 'bg-white/95 backdrop-blur-md py-4 shadow-sm' : 'bg-transparent py-6'}`}>
+                        <div className="flex justify-between items-center max-w-lg mx-auto">
+                            <h1 className={`text-xl font-serif tracking-[0.3em] uppercase transition-colors duration-500 ${scrolled ? 'text-black' : 'text-white'}`}>
+                                Gabu Orient
+                            </h1>
+                            <div className="flex items-center space-x-4">
+                                <button className={`p-1 transition-colors duration-500 ${scrolled ? 'text-black' : 'text-white'}`}>
+                                    <Icon name="menu" size={24} />
+                                </button>
+                            </div>
+                        </div>
+                    </header>
+
+                    <section className="relative h-[75vh] w-full flex flex-col justify-end px-6 pb-16 overflow-hidden">
+                        <div className="absolute inset-0 z-0">
+                            <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1000" className="w-full h-full object-cover brightness-[0.75]" alt="Interior" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
+                        </div>
+                        
+                        <div className="relative z-10 space-y-4">
+                            <div className="flex items-center space-x-2">
+                                <div className="w-8 h-[1px] bg-white/60" />
+                                <span className="text-[9px] tracking-[0.5em] uppercase text-white/80 font-bold">The Art of Living</span>
+                            </div>
+                            <h2 className="text-5xl font-serif text-white leading-tight tracking-tight">感性を、<br />住まいへ。</h2>
+                            <button className="flex items-center space-x-3 text-white group pt-4">
+                                <span className="text-[10px] tracking-[0.3em] font-black uppercase border-b border-white/30 pb-1">Explore More</span>
+                                <Icon name="arrow-up-right" size={14} />
+                            </button>
+                        </div>
+                    </section>
+
+                    <section className="sticky top-0 z-50 bg-[#FDFDFD]/90 backdrop-blur-md px-6 py-4 border-b border-gray-100 shadow-sm">
+                        <div className="flex justify-between items-center max-w-lg mx-auto">
+                            <div className="flex space-x-6 overflow-x-auto no-scrollbar py-1">
+                                {['すべて', '賃貸', '売買', '新着'].map((cat, i) => (
+                                    <button key={cat} className={`text-[10px] font-black tracking-widest uppercase whitespace-nowrap ${i === 0 ? 'text-black border-b-2 border-black' : 'text-gray-300'}`}>
+                                        {cat}
+                                    </button>
+                                ))}
+                            </div>
+                            <div className="flex items-center space-x-4 pl-4 border-l border-gray-100">
+                                <button onClick={() => setViewType(viewType === 'grid' ? 'list' : 'grid')} className="text-gray-400">
+                                    <Icon name={viewType === 'grid' ? 'square' : 'layout-grid'} size={18} />
+                                </button>
+                                <Icon name="filter" size={18} className="text-gray-400" />
+                            </div>
+                        </div>
+                    </section>
+
+                    <main className="px-5 pt-8 max-w-lg mx-auto">
+                        <div className="flex justify-between items-baseline mb-6">
+                            <h4 className="text-[10px] tracking-[0.4em] text-gray-400 font-black uppercase">Archives</h4>
+                            <span className="text-[10px] text-gray-300 font-bold">4 Items Found</span>
+                        </div>
+                        <div className={`grid gap-5 ${viewType === 'grid' ? 'grid-cols-2' : 'grid-cols-1'}`}>
+                            {PROPERTIES.map(p => <PropertyCard key={p.id} property={p} viewType={viewType} />)}
+                        </div>
+                        <button className="w-full mt-12 py-5 bg-white border border-gray-100 rounded-xl text-[10px] tracking-[0.4em] font-black uppercase shadow-sm">View Collection</button>
+                    </main>
+
+                    <section className="mt-24 px-8 py-20 bg-zinc-900 text-white rounded-t-[3rem]">
+                        <div className="max-w-lg mx-auto space-y-12">
+                            <div className="space-y-4">
+                                <span className="text-[9px] tracking-[0.5em] text-white/30 font-black uppercase">Our Identity</span>
+                                <h3 className="text-3xl font-serif leading-snug">創造性で、<br />不動産の未来を<br />リデザインする。</h3>
+                                <p className="text-xs text-white/50 leading-loose font-light">GABU ORIENT（ガブオリエント）は、福岡の街に眠る「感性」を掘り起こし、新しい価値として繋ぐクリエイティブ・エージェンシーです。</p>
+                            </div>
+                            <div className="space-y-8 pt-8 border-t border-white/5">
+                                <div className="grid grid-cols-2 gap-8">
+                                    <div className="space-y-2">
+                                        <span className="text-[8px] text-white/20 uppercase tracking-[0.3em]">Company</span>
+                                        <p className="text-xs font-bold">GABU ORIENT</p>
+                                    </div>
+                                    <div className="space-y-2">
+                                        <span className="text-[8px] text-white/20 uppercase tracking-[0.3em]">Representative</span>
+                                        <p className="text-xs font-bold">篠原 三樹博</p>
+                                    </div>
+                                </div>
+                                <div className="space-y-2">
+                                    <span className="text-[8px] text-white/20 uppercase tracking-[0.3em]">Location</span>
+                                    <p className="text-xs font-light">福岡市東区馬出1-24-31-102</p>
+                                </div>
+                                <div className="flex space-x-10 pt-4 opacity-40">
+                                    <Icon name="instagram" size={22} />
+                                    <Icon name="mail" size={22} />
+                                    <Icon name="phone" size={22} />
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div className="fixed bottom-24 right-6 z-[90]">
+                        <button className="w-14 h-14 bg-black text-white rounded-full flex items-center justify-center shadow-2xl">
+                            <Icon name="phone" size={24} />
+                        </button>
+                    </div>
+
+                    <BottomNav activeTab={activeTab} setActiveTab={setActiveTab} />
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
