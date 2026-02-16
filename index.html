@@ -26,7 +26,7 @@
                         'gabu-brass': '#b08d55',
                         'gabu-brass-dim': '#8a703e',
                         'gabu-concrete': '#a0a0a0',
-                        'gabu-dark-bg': '#0f0f0f', /* Added for Footer Background */
+                        'gabu-dark-bg': '#0f0f0f',
                     },
                     fontFamily: {
                         'sans': ['Oswald', 'sans-serif'],
@@ -86,7 +86,7 @@
 
         /* Scroll Triggered Reveal Animation */
         .reveal-on-scroll {
-            opacity: 1; /* デフォルトを表示状態に変更 */
+            opacity: 1;
             transition: opacity 1.2s ease-out, transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
@@ -144,9 +144,11 @@
     <header class="fixed top-0 left-0 w-full z-50 px-6 py-6 md:px-12 flex justify-between items-center pointer-events-none mix-blend-multiply">
         <div class="pointer-events-auto flex items-center gap-4">
             <!-- Header Logo Area -->
-            <img src="https://placehold.co/100x40/transparent/2c2c2c?text=LOGO" 
+            <!-- Upload "logo-header.png" to GitHub -->
+            <img src="logo-header.png" 
                  alt="GABU ORIENT Logo" 
-                 class="h-10 w-auto object-contain">
+                 class="h-10 w-auto object-contain"
+                 onerror="this.style.display='none'">
             
             <div>
                 <h1 class="font-sans font-bold text-xl tracking-widest text-gabu-text">GABU ORIENT</h1>
@@ -163,6 +165,7 @@
     <!-- Hero Section -->
     <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 z-0">
+            <!-- Main Hero Image: Unsplash URL (Can be replaced with "top-bg.jpg" if needed) -->
             <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=2370&auto=format&fit=crop" 
                  alt="Bright Renovation Interior" 
                  class="w-full h-full object-cover opacity-90">
@@ -221,7 +224,8 @@
             <div class="grid grid-cols-1 md:grid-cols-12 gap-0 items-center">
                 <div class="md:col-span-8 relative reveal-on-scroll">
                     <div class="aspect-[16/10] md:aspect-[16/9] w-full overflow-hidden relative bg-gray-200">
-                        <img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=2370&auto=format&fit=crop" 
+                        <!-- Upload "story-city.jpg" to GitHub -->
+                        <img src="story-city.jpg" 
                              alt="Abstract City Night" 
                              class="w-full h-full object-cover parallax-img opacity-90 grayscale-[30%]">
                         <div class="absolute inset-0 bg-gradient-to-r from-gabu-bg/10 to-gabu-bg/0"></div>
@@ -269,7 +273,8 @@
 
                 <div class="order-1 md:order-2 md:col-span-7 relative reveal-on-scroll">
                     <div class="aspect-[4/5] md:aspect-[4/3] w-full overflow-hidden bg-gray-200">
-                        <img src="https://images.unsplash.com/photo-1481026469463-66327c86e544?q=80&w=2370&auto=format&fit=crop" 
+                        <!-- Upload "story-curation.jpg" to GitHub -->
+                        <img src="story-curation.jpg" 
                              alt="Industrial Texture Studio" 
                              class="w-full h-full object-cover parallax-img grayscale-[20%]">
                     </div>
@@ -282,7 +287,8 @@
             <div class="flex flex-col md:flex-row items-end gap-8 md:gap-16">
                 <div class="w-full md:w-1/2">
                     <div class="aspect-[3/4] overflow-hidden relative border-b border-gabu-brass pb-4 bg-gray-200">
-                         <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?q=80&w=2370&auto=format&fit=crop" 
+                         <!-- Upload "story-vintage.jpg" to GitHub -->
+                         <img src="story-vintage.jpg" 
                              alt="Silhouette landscape" 
                              class="w-full h-full object-cover parallax-img grayscale-[40%] hover:grayscale-0 transition-all duration-700">
                          <span class="absolute bottom-0 right-0 font-sans text-xs text-gabu-brass tracking-widest bg-gabu-bg px-2 py-1">THE VINTAGE</span>
@@ -348,15 +354,16 @@
     </section>
 
     <!-- Footer / Company Profile -->
-    <!-- Updated to Industrial Dark Theme with Definition List -->
     <footer class="bg-gabu-dark-bg text-gray-300 py-20 px-6 border-t border-white/5 font-sans">
         <div class="container mx-auto max-w-5xl">
             
             <!-- Footer Logo & Title -->
             <div class="mb-16 text-center md:text-left reveal-on-scroll">
-                <img src="https://placehold.co/100x40/transparent/ffffff?text=LOGO" 
+                <!-- Upload "logo-footer.png" to GitHub -->
+                <img src="logo-footer.png" 
                      alt="GABU ORIENT Footer Logo" 
-                     class="h-12 w-auto object-contain mb-4 opacity-80 inline-block md:block">
+                     class="h-12 w-auto object-contain mb-4 opacity-80 inline-block md:block"
+                     onerror="this.style.display='none'">
                 <h5 class="text-white text-3xl font-bold tracking-widest mb-2">GABU ORIENT</h5>
                 <p class="text-xs text-gabu-brass uppercase tracking-widest">Company Profile</p>
             </div>
