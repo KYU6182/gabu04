@@ -19,13 +19,14 @@
             theme: {
                 extend: {
                     colors: {
-                        'gabu-bg': '#f5f5f2',     /* Warm Greige / Off-white */
-                        'gabu-surface': '#ebebea', /* Slightly darker for cards */
-                        'gabu-text': '#2c2c2c',    /* Soft Charcoal */
+                        'gabu-bg': '#f5f5f2',
+                        'gabu-surface': '#ebebea',
+                        'gabu-text': '#2c2c2c',
                         'gabu-text-light': '#595959',
-                        'gabu-brass': '#b08d55',   /* Slightly darker brass for contrast on light bg */
+                        'gabu-brass': '#b08d55',
                         'gabu-brass-dim': '#8a703e',
                         'gabu-concrete': '#a0a0a0',
+                        'gabu-dark-bg': '#0f0f0f', /* Added for Footer Background */
                     },
                     fontFamily: {
                         'sans': ['Oswald', 'sans-serif'],
@@ -65,7 +66,7 @@
             color: #fff;
         }
 
-        /* Subtle Fade In Animation */
+        /* Subtle Fade In Animation (Load) */
         .fade-in-up {
             animation: fadeInUp 1.2s ease-out forwards;
             opacity: 0;
@@ -83,13 +84,38 @@
             }
         }
 
+        /* Scroll Triggered Reveal Animation */
+        .reveal-on-scroll {
+            opacity: 1; /* デフォルトを表示状態に変更 */
+            transition: opacity 1.2s ease-out, transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .js-scroll-hidden {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        
+        .reveal-visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        /* Image Parallax Effect */
+        .parallax-img {
+            transition: transform 1.5s ease-out;
+            transform: scale(1.1);
+        }
+        .reveal-visible .parallax-img {
+            transform: scale(1.0);
+        }
+
         /* Image Hover Effect */
         .img-zoom-container {
             overflow: hidden;
         }
         .img-zoom {
             transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.5s;
-            filter: grayscale(20%); /* Less grayscale for warmer feel */
+            filter: grayscale(20%);
         }
         .group:hover .img-zoom {
             transform: scale(1.05);
@@ -104,19 +130,23 @@
         .group:hover .line-grow {
             width: 100%;
         }
+
+        /* Vertical Text Support */
+        .vertical-rl {
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+        }
     </style>
 </head>
 <body class="bg-gabu-bg text-gabu-text font-serif antialiased selection:bg-gabu-brass selection:text-white">
 
     <!-- Fixed Header / Navigation -->
     <header class="fixed top-0 left-0 w-full z-50 px-6 py-6 md:px-12 flex justify-between items-center pointer-events-none mix-blend-multiply">
-        <!-- Logo & Text Container -->
         <div class="pointer-events-auto flex items-center gap-4">
-            <!-- Logo Image -->
-            <!-- GitHubにアップロードした「logo.png」を読み込む設定です -->
-            <img src="logo.png" 
+            <!-- Header Logo Area -->
+            <img src="https://placehold.co/100x40/transparent/2c2c2c?text=LOGO" 
                  alt="GABU ORIENT Logo" 
-                 class="h-12 w-auto object-contain">
+                 class="h-10 w-auto object-contain">
             
             <div>
                 <h1 class="font-sans font-bold text-xl tracking-widest text-gabu-text">GABU ORIENT</h1>
@@ -132,19 +162,14 @@
 
     <!-- Hero Section -->
     <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
-        <!-- Background Image with Overlay -->
         <div class="absolute inset-0 z-0">
-            <!-- Updated Image: Brighter, more airy renovation space with wood and white walls -->
             <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=2370&auto=format&fit=crop" 
                  alt="Bright Renovation Interior" 
                  class="w-full h-full object-cover opacity-90">
-            <!-- Lighter Overlay for readability -->
             <div class="absolute inset-0 bg-white/30 backdrop-blur-[1px]"></div>
-            <!-- Grain Texture Overlay (Subtle) -->
             <div class="absolute inset-0 opacity-30 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuNjUiIG51bW9jdGF2ZXM9IjMiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjbm9pc2UpIiBvcGFjaXR5PSIwLjUiLz48L3N2Zz4=')]"></div>
         </div>
 
-        <!-- Hero Content -->
         <div class="relative z-10 text-center px-4">
             <p class="font-sans text-gabu-text-light tracking-[0.3em] text-sm md:text-base mb-4 fade-in-up font-medium">CURATE YOUR LIFE</p>
             <h2 class="font-sans text-5xl md:text-8xl lg:text-9xl font-medium tracking-tight text-gabu-text fade-in-up delay-200">
@@ -157,18 +182,15 @@
             </p>
         </div>
 
-        <!-- Scroll Indicator -->
         <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-60 animate-bounce">
             <span class="text-[10px] tracking-widest mb-2 font-sans text-gabu-text">SCROLL</span>
             <div class="w-[1px] h-12 bg-gabu-text"></div>
         </div>
     </section>
 
-    <!-- Philosophy Section -->
-    <section class="py-24 md:py-40 px-6 md:px-12 bg-gabu-bg relative border-t border-gabu-text/5">
+    <!-- Philosophy Section (Short Intro) -->
+    <section class="py-24 md:py-32 px-6 md:px-12 bg-gabu-bg relative border-t border-gabu-text/5">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-            
-            <!-- Typography Art -->
             <div class="md:col-span-5 relative">
                 <h3 class="font-sans text-6xl md:text-8xl font-bold text-gray-200 leading-none absolute -top-20 -left-10 z-0 select-none">
                     PHILOSOPHY
@@ -181,30 +203,110 @@
                     </h2>
                 </div>
             </div>
-
-            <!-- Text Content -->
             <div class="md:col-span-7 space-y-8 text-justify">
                 <p class="text-gabu-text-light leading-loose tracking-wide">
                     私たちは、ただの「箱」を紹介することはありません。<br>
                     時を経た建物が持つかすれた声に耳を傾け、<br>
                     コンクリートの質感と、窓辺に揺れる光の温度を感じ取る。
                 </p>
-                <p class="text-gabu-text-light leading-loose tracking-wide">
-                    GABU ORIENTが提案するのは、物件という物理的な空間ではなく、<br>
-                    あなたのライフスタイルという「旋律」を重ねるためのベースラインです。<br>
-                    古き良きものの価値を再定義し、感性が共鳴する場所だけをセレクトする。
-                </p>
-                <div class="pt-8">
-                    <a href="#" class="inline-block border-b border-gabu-brass pb-1 text-gabu-brass text-sm tracking-widest hover:text-gabu-text hover:border-gabu-text transition-colors duration-300 font-sans">
-                        VIEW MORE PHILOSOPHY
-                    </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Narrative Section -->
+    <section class="bg-gabu-bg py-20 overflow-hidden">
+        
+        <!-- BLOCK 1: THE CITY -->
+        <div class="max-w-screen-2xl mx-auto mb-32 md:mb-48 relative">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-0 items-center">
+                <div class="md:col-span-8 relative reveal-on-scroll">
+                    <div class="aspect-[16/10] md:aspect-[16/9] w-full overflow-hidden relative bg-gray-200">
+                        <img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=2370&auto=format&fit=crop" 
+                             alt="Abstract City Night" 
+                             class="w-full h-full object-cover parallax-img opacity-90 grayscale-[30%]">
+                        <div class="absolute inset-0 bg-gradient-to-r from-gabu-bg/10 to-gabu-bg/0"></div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-4 md:-ml-20 relative z-10 p-6 md:p-12 reveal-on-scroll delay-200">
+                    <div class="bg-gabu-bg/95 backdrop-blur-sm p-8 md:p-12 border-l border-gabu-brass shadow-xl">
+                        <div class="flex flex-row-reverse justify-between items-start gap-8">
+                            <h3 class="vertical-rl text-2xl md:text-3xl font-serif text-gabu-text tracking-widest leading-loose h-48 md:h-64 border-r border-gabu-text/10 pr-4">
+                                福岡は、<br>熱狂の街です。
+                            </h3>
+                            <div class="flex-1 pt-4">
+                                <span class="font-sans text-gabu-brass text-xs tracking-widest block mb-6">THE CITY</span>
+                                <p class="text-sm text-gabu-text-light leading-loose font-serif text-justify">
+                                    新しい文化と古い伝統が交錯し、常に何かが生まれ続ける場所。<br><br>
+                                    しかし、私たちは問います。<br>
+                                    あなたの帰る場所は、その喧騒に流されていないか。<br>
+                                    ただ寝に帰るだけの「箱」になっていないか。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLOCK 2: THE CURATION -->
+        <div class="max-w-screen-2xl mx-auto mb-32 md:mb-48 relative">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-0 items-center">
+                <div class="order-2 md:order-1 md:col-span-5 md:-mr-20 relative z-10 p-6 md:p-12 reveal-on-scroll delay-200">
+                     <div class="bg-white/95 backdrop-blur-sm p-8 md:p-16 border-r border-gabu-brass shadow-xl">
+                        <h3 class="font-sans text-4xl md:text-6xl text-gabu-text mb-8 tracking-tighter">
+                            STANDARD<br><span class="text-gabu-brass">& MOOD.</span>
+                        </h3>
+                        <p class="text-sm md:text-base text-gabu-text-light leading-loose font-serif text-justify mb-8">
+                            GABU ORIENTは、あなたのライフスタイルのBGMを決める、空間のキュレーターです。<br><br>
+                            心地よいJAZZが空間の質を変えるように。<br>
+                            仕立ての良いジャケットが背筋を伸ばしてくれるように。<br>
+                            住まいは、人生のリズムを整える「楽器」であるべきです。
+                        </p>
+                        <span class="font-sans text-gabu-concrete text-xs tracking-widest block text-right">02 — CURATION</span>
+                     </div>
+                </div>
+
+                <div class="order-1 md:order-2 md:col-span-7 relative reveal-on-scroll">
+                    <div class="aspect-[4/5] md:aspect-[4/3] w-full overflow-hidden bg-gray-200">
+                        <img src="https://images.unsplash.com/photo-1481026469463-66327c86e544?q=80&w=2370&auto=format&fit=crop" 
+                             alt="Industrial Texture Studio" 
+                             class="w-full h-full object-cover parallax-img grayscale-[20%]">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLOCK 3: THE VINTAGE -->
+        <div class="max-w-5xl mx-auto px-6 reveal-on-scroll">
+            <div class="flex flex-col md:flex-row items-end gap-8 md:gap-16">
+                <div class="w-full md:w-1/2">
+                    <div class="aspect-[3/4] overflow-hidden relative border-b border-gabu-brass pb-4 bg-gray-200">
+                         <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?q=80&w=2370&auto=format&fit=crop" 
+                             alt="Silhouette landscape" 
+                             class="w-full h-full object-cover parallax-img grayscale-[40%] hover:grayscale-0 transition-all duration-700">
+                         <span class="absolute bottom-0 right-0 font-sans text-xs text-gabu-brass tracking-widest bg-gabu-bg px-2 py-1">THE VINTAGE</span>
+                    </div>
+                </div>
+
+                <div class="w-full md:w-1/2 pb-8">
+                    <h3 class="text-3xl md:text-4xl font-serif text-gabu-text mb-8 leading-relaxed">
+                        経年変化という、<br>
+                        <span class="border-b border-gabu-brass pb-1">美学。</span>
+                    </h3>
+                    <p class="text-sm text-gabu-text-light leading-loose font-serif text-justify mb-8">
+                        新築が全てではない。<br>
+                        時を経た物件だけが持つ「色気」に、あなたの感性を重ねてください。<br><br>
+                        私たちは、福岡中の膨大な不動産の中から、「スペック」ではなく「物語」で物件をセレクトしています。
+                    </p>
+                    <div class="w-12 h-[1px] bg-gabu-text/20"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Collection Section (Lookbook Style / Coming Soon) -->
-    <section class="py-20 bg-gabu-surface text-gabu-text">
+    <!-- Collection Section -->
+    <section class="py-20 bg-gabu-surface text-gabu-text border-t border-white/50">
         <div class="container mx-auto px-6 md:px-12">
             <div class="flex justify-between items-end mb-16 border-b border-gabu-text/10 pb-4">
                 <h3 class="font-sans text-4xl md:text-5xl uppercase tracking-tighter">
@@ -213,28 +315,25 @@
                 <span class="font-sans text-xs tracking-widest text-gabu-text-light mb-2">NEXT COLLECTION</span>
             </div>
 
-            <!-- "Under Curation" Layout (No Items) -->
             <div class="flex flex-col items-center justify-center py-20 md:py-32 relative overflow-hidden">
-                <!-- Decorative Background Text -->
                 <span class="absolute text-[10rem] md:text-[15rem] font-sans font-bold text-gabu-text opacity-[0.03] select-none pointer-events-none whitespace-nowrap">
                     COMING SOON
                 </span>
 
-                <!-- Content -->
                 <div class="relative z-10 flex flex-col items-center text-center">
-                    <div class="w-px h-16 bg-gabu-brass mb-8 fade-in-up"></div>
+                    <div class="w-px h-16 bg-gabu-brass mb-8 reveal-on-scroll"></div>
                     
-                    <h4 class="font-sans text-2xl md:text-4xl tracking-[0.2em] text-gabu-text mb-6 fade-in-up delay-200">
+                    <h4 class="font-sans text-2xl md:text-4xl tracking-[0.2em] text-gabu-text mb-6 reveal-on-scroll delay-200">
                         UNDER CURATION
                     </h4>
                     
-                    <p class="font-serif text-sm md:text-base text-gabu-text-light leading-loose max-w-xl mb-12 fade-in-up delay-500">
+                    <p class="font-serif text-sm md:text-base text-gabu-text-light leading-loose max-w-xl mb-12 reveal-on-scroll delay-500">
                         私たちは、妥協のない空間のみをお届けするため、<br class="hidden md:block">
                         現在、独自の視点で物件の「選定」を行っております。<br>
                         次回のコレクション公開まで、静かにお待ちください。
                     </p>
 
-                    <a href="#" class="group relative inline-flex items-center gap-3 px-8 py-4 border border-gabu-text/20 hover:border-gabu-brass transition-colors duration-500 fade-in-up delay-700">
+                    <a href="#" class="group relative inline-flex items-center gap-3 px-8 py-4 border border-gabu-text/20 hover:border-gabu-brass transition-colors duration-500 reveal-on-scroll delay-700">
                         <span class="absolute inset-0 bg-gabu-brass transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left ease-out"></span>
                         <span class="relative font-sans text-xs tracking-widest text-gabu-text group-hover:text-white transition-colors duration-300">
                             JOIN WAITING LIST
@@ -245,72 +344,159 @@
                     </a>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Footer / Company Profile -->
+    <!-- Updated to Industrial Dark Theme with Definition List -->
+    <footer class="bg-gabu-dark-bg text-gray-300 py-20 px-6 border-t border-white/5 font-sans">
+        <div class="container mx-auto max-w-5xl">
             
-        </div>
-    </section>
-
-    <!-- Mood Visual Section -->
-    <section class="h-[60vh] w-full relative bg-fixed bg-center bg-cover" style="background-image: url('https://images.unsplash.com/photo-1588854337473-b76010c509ef?q=80&w=2370&auto=format&fit=crop');">
-        <!-- Lighter overlay for Mood Section -->
-        <div class="absolute inset-0 bg-white/20"></div>
-        <div class="absolute inset-0 flex items-center justify-center">
-            <p class="font-serif text-2xl md:text-4xl text-white drop-shadow-lg italic text-center leading-relaxed">
-                "Architecture should speak of its time and place,<br> but yearn for timelessness."
-            </p>
-        </div>
-    </section>
-
-    <!-- Footer / Company Info -->
-    <!-- Changed footer to a dark grey for grounding, but not pitch black -->
-    <footer class="bg-zinc-800 text-gray-400 py-20 px-6 border-t border-white/5 font-sans">
-        <div class="container mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
-                <!-- Brand -->
-                <div class="md:col-span-1">
-                    <h5 class="text-white text-2xl font-bold tracking-widest mb-6">GABU ORIENT</h5>
-                    <p class="text-xs text-gabu-brass uppercase tracking-widest mb-1">Representative</p>
-                    <p class="text-sm text-gray-300 mb-6 font-serif">篠原　三樹博</p>
-                </div>
-
-                <!-- Navigation (Menu Style) -->
-                <div class="md:col-span-1">
-                    <ul class="space-y-4 text-sm tracking-wide">
-                        <li><a href="#" class="hover:text-gabu-brass transition-colors">COLLECTION</a></li>
-                        <li><a href="#" class="hover:text-gabu-brass transition-colors">PHILOSOPHY</a></li>
-                        <li><a href="#" class="hover:text-gabu-brass transition-colors">SERVICE</a></li>
-                        <li><a href="#" class="hover:text-gabu-brass transition-colors">CONTACT</a></li>
-                    </ul>
-                </div>
-
-                <!-- Contact & License -->
-                <div class="md:col-span-2 md:text-right flex flex-col items-start md:items-end">
-                    <div class="mb-8">
-                        <p class="text-xs text-gabu-brass uppercase tracking-widest mb-2">Address</p>
-                        <p class="text-sm font-serif">1-24-31-102 Maidashi, Higashi-ku, Fukuoka 812-0054</p>
-                    </div>
-                    <div class="mb-8">
-                        <p class="text-xs text-gabu-brass uppercase tracking-widest mb-2">Contact</p>
-                        <p class="text-sm font-serif tracking-wider">092-515-6178</p>
-                        <p class="text-sm font-serif tracking-wider">m.shinohara@gabu-orient.com</p>
-                    </div>
-                    <div class="border border-white/20 px-4 py-2 inline-block mt-auto">
-                        <p class="text-[10px] text-gray-500 uppercase tracking-widest">License Number</p>
-                        <p class="text-xs text-gray-300 font-serif">福岡県知事（1）第21024号</p>
-                    </div>
-                </div>
+            <!-- Footer Logo & Title -->
+            <div class="mb-16 text-center md:text-left reveal-on-scroll">
+                <img src="https://placehold.co/100x40/transparent/ffffff?text=LOGO" 
+                     alt="GABU ORIENT Footer Logo" 
+                     class="h-12 w-auto object-contain mb-4 opacity-80 inline-block md:block">
+                <h5 class="text-white text-3xl font-bold tracking-widest mb-2">GABU ORIENT</h5>
+                <p class="text-xs text-gabu-brass uppercase tracking-widest">Company Profile</p>
             </div>
 
-            <!-- Copyright -->
-            <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5 text-[10px] tracking-widest uppercase">
+            <!-- Definition List / Table Layout -->
+            <div class="border-t border-gray-800 reveal-on-scroll delay-200">
+                
+                <!-- Row 1: 商号 -->
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline">
+                    <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">
+                        商号
+                    </div>
+                    <div class="md:col-span-9 text-sm text-gray-200 font-serif leading-relaxed">
+                        株式会社 GABU ORIENT<br>
+                        <span class="text-xs text-gray-500 font-sans mt-1 block tracking-wider">GABU ORIENT Inc.</span>
+                    </div>
+                </div>
+
+                <!-- Row 2: 設立 -->
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline">
+                    <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">
+                        設立
+                    </div>
+                    <div class="md:col-span-9 text-sm text-gray-200 font-serif">
+                        [ 20xx年 x月 x日 ]
+                    </div>
+                </div>
+
+                <!-- Row 3: 資本金 -->
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline">
+                    <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">
+                        資本金
+                    </div>
+                    <div class="md:col-span-9 text-sm text-gray-200 font-serif">
+                        [ x,xxx万円 ]
+                    </div>
+                </div>
+
+                <!-- Row 4: 本社 -->
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline">
+                    <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">
+                        本社
+                    </div>
+                    <div class="md:col-span-9 text-sm text-gray-200 font-serif leading-loose">
+                        〒812-0054<br>
+                        福岡市東区馬出1-24-31-102<br>
+                        <a href="https://www.google.com/maps/search/?api=1&query=福岡市東区馬出1-24-31-102" target="_blank" class="inline-flex items-center gap-2 mt-2 text-xs text-gabu-brass hover:text-white transition-colors font-sans tracking-wider border-b border-gabu-brass/50 pb-0.5">
+                            VIEW GOOGLE MAP
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Row 5: 代表者 -->
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline">
+                    <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">
+                        代表者
+                    </div>
+                    <div class="md:col-span-9 text-sm text-gray-200 font-serif">
+                        代表取締役　篠原 三樹博
+                    </div>
+                </div>
+
+                <!-- Row 6: 事業内容 -->
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline">
+                    <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">
+                        事業内容
+                    </div>
+                    <div class="md:col-span-9 text-sm text-gray-200 font-serif leading-loose">
+                        <ul class="list-none space-y-1">
+                            <li>不動産の売買・仲介・管理</li>
+                            <li>リノベーションの企画・設計・施工</li>
+                            <li>店舗・オフィス・住宅の空間プロデュース</li>
+                            <li>不動産コンサルティング</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Row 7: 許認可等 -->
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline">
+                    <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">
+                        許認可等
+                    </div>
+                    <div class="md:col-span-9 text-sm text-gray-200 font-serif">
+                        宅地建物取引業者免許 福岡県知事（1）第21024号
+                    </div>
+                </div>
+
+                <!-- Row 8: 連絡先 -->
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline">
+                    <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">
+                        連絡先
+                    </div>
+                    <div class="md:col-span-9 text-sm text-gray-200 font-serif tracking-wide">
+                        Tel: 092-515-6178<span class="mx-4 text-gray-600">/</span>Fax: 092-206-8029
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom: Copyright & Links -->
+            <div class="flex flex-col md:flex-row justify-between items-center pt-12 mt-12 text-[10px] tracking-widest uppercase text-gray-600">
                 <p>&copy; 2024 GABU ORIENT Inc. All Rights Reserved.</p>
-                <div class="flex gap-4 mt-4 md:mt-0">
-                    <a href="#" class="hover:text-white transition-colors">Instagram</a>
-                    <a href="#" class="hover:text-white transition-colors">Facebook</a>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition-colors">COLLECTION</a>
+                    <a href="#" class="hover:text-white transition-colors">PHILOSOPHY</a>
+                    <a href="#" class="hover:text-white transition-colors">CONTACT</a>
+                    <a href="#" class="hover:text-white transition-colors ml-4">INSTAGRAM</a>
                 </div>
             </div>
+
         </div>
     </footer>
 
+    <!-- Scroll Reveal Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const revealElements = document.querySelectorAll('.reveal-on-scroll');
+            revealElements.forEach(el => el.classList.add('js-scroll-hidden'));
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15 
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.remove('js-scroll-hidden');
+                        entry.target.classList.add('reveal-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            revealElements.forEach(el => observer.observe(el));
+        });
+    </script>
 </body>
 </html>
-
