@@ -76,12 +76,40 @@
         .delay-200 { animation-delay: 0.2s; }
         .delay-500 { animation-delay: 0.5s; }
         .delay-700 { animation-delay: 0.7s; }
+        .delay-1000 { animation-delay: 1.0s; }
 
         @keyframes fadeInUp {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        /* Blur Focus In Animation for Title */
+        .text-focus-in {
+            animation: textFocusIn 2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+        }
+        
+        @keyframes textFocusIn {
+            0% {
+                filter: blur(12px);
+                opacity: 0;
+                transform: scale(1.05);
+            }
+            100% {
+                filter: blur(0px);
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Ken Burns Effect (Slow Zoom) for Background */
+        .ken-burns {
+            animation: kenBurns 25s ease-out infinite alternate;
+        }
+        @keyframes kenBurns {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.15); }
         }
 
         /* Scroll Triggered Reveal Animation */
@@ -165,30 +193,33 @@
     <!-- Hero Section -->
     <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <!-- Main Hero Image: Unsplash URL (Can be replaced with "top-bg.jpg" if needed) -->
-            <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=2370&auto=format&fit=crop" 
-                 alt="Bright Renovation Interior" 
-                 class="w-full h-full object-cover opacity-90">
-            <div class="absolute inset-0 bg-white/30 backdrop-blur-[1px]"></div>
+            <!-- Main Hero Image -->
+            <div class="w-full h-full overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=2370&auto=format&fit=crop" 
+                     alt="Bright Renovation Interior" 
+                     class="w-full h-full object-cover opacity-90 ken-burns">
+            </div>
+            
+            <!-- Overlay adjustments for readability -->
+            <div class="absolute inset-0 bg-white/40 backdrop-blur-[1px]"></div>
             <div class="absolute inset-0 opacity-30 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuNjUiIG51bW9jdGF2ZXM9IjMiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjbm9pc2UpIiBvcGFjaXR5PSIwLjUiLz48L3N2Zz4=')]"></div>
         </div>
 
+        <!-- Hero Content Text -->
         <div class="relative z-10 text-center px-4 w-full max-w-5xl mx-auto">
-            <p class="font-sans text-gabu-text-light tracking-[0.3em] text-sm md:text-base mb-8 fade-in-up font-medium">CURATE YOUR LIFE</p>
             
-            <!-- Main Hero Logo (Replaces Text) -->
-            <!-- Upload "logo-hero.png" to GitHub -->
-            <div class="fade-in-up delay-200 mb-8 flex justify-center">
-                <img src="logo-hero.png" 
-                     alt="GABU ORIENT Main Logo" 
-                     class="w-64 md:w-96 lg:w-[32rem] max-w-full object-contain drop-shadow-sm"
-                     onerror="this.style.display='none'">
-            </div>
-
-            <div class="mt-8 md:mt-12 h-[1px] w-24 bg-gabu-brass mx-auto fade-in-up delay-500"></div>
-            <p class="mt-8 font-serif text-sm md:text-lg tracking-widest text-gabu-text-light fade-in-up delay-700 italic">
-                Not just a Room. It’s a Rhythm.
+            <!-- Catchphrase: "Sumai wo, Matou." -->
+            <h2 class="font-serif text-4xl md:text-6xl lg:text-7xl font-medium tracking-widest text-gabu-text mb-6 text-focus-in leading-relaxed drop-shadow-sm">
+                住まいを、<br class="md:hidden">纏う。
+            </h2>
+            
+            <!-- Brand Name -->
+            <p class="font-sans text-xl md:text-2xl tracking-[0.4em] text-gabu-text-light fade-in-up delay-500 font-normal">
+                GABU ORIENT
             </p>
+
+            <!-- Divider (No text below) -->
+            <div class="mt-12 h-[1px] w-16 bg-gabu-brass mx-auto fade-in-up delay-700"></div>
         </div>
 
         <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-60 animate-bounce">
@@ -197,7 +228,7 @@
         </div>
     </section>
 
-    <!-- Philosophy Section (Short Intro) -->
+    <!-- Philosophy Section (Introduction to "Matou") -->
     <section class="py-24 md:py-32 px-6 md:px-12 bg-gabu-bg relative border-t border-gabu-text/5">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
             <div class="md:col-span-5 relative">
@@ -214,18 +245,22 @@
             </div>
             <div class="md:col-span-7 space-y-8 text-justify">
                 <p class="text-gabu-text-light leading-loose tracking-wide">
-                    私たちは、ただの「箱」を紹介することはありません。<br>
-                    時を経た建物が持つかすれた声に耳を傾け、<br>
-                    コンクリートの質感と、窓辺に揺れる光の温度を感じ取る。
+                    着心地の良いシャツに袖を通すときのような、あの感覚。<br>
+                    住まいは、生活の背景である以上に、あなた自身を包み込む「衣服」のような存在だと私たちは考えます。
+                </p>
+                <p class="text-gabu-text-light leading-loose tracking-wide">
+                    ただスペックを満たすだけの「箱」ではなく、<br>
+                    時を経た建物の声に耳を傾け、あなたの感性と肌に馴染む空間だけをセレクトする。<br>
+                    それが、GABU ORIENTの提案する「住まいを、纏う」というスタイルです。
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- Narrative Section -->
+    <!-- Narrative Section (Connecting the theme) -->
     <section class="bg-gabu-bg py-20 overflow-hidden">
         
-        <!-- BLOCK 1: THE CITY -->
+        <!-- BLOCK 1: THE CITY (From Outside to Inside) -->
         <div class="max-w-screen-2xl mx-auto mb-32 md:mb-48 relative">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-0 items-center">
                 <div class="md:col-span-8 relative reveal-on-scroll">
@@ -242,15 +277,15 @@
                     <div class="bg-gabu-bg/95 backdrop-blur-sm p-8 md:p-12 border-l border-gabu-brass shadow-xl">
                         <div class="flex flex-row-reverse justify-between items-start gap-8">
                             <h3 class="vertical-rl text-2xl md:text-3xl font-serif text-gabu-text tracking-widest leading-loose h-48 md:h-64 border-r border-gabu-text/10 pr-4">
-                                福岡は、<br>熱狂の街です。
+                                熱狂を、<br>脱ぎ捨てる。
                             </h3>
                             <div class="flex-1 pt-4">
                                 <span class="font-sans text-gabu-brass text-xs tracking-widest block mb-6">THE CITY</span>
                                 <p class="text-sm text-gabu-text-light leading-loose font-serif text-justify">
-                                    新しい文化と古い伝統が交錯し、常に何かが生まれ続ける場所。<br><br>
-                                    しかし、私たちは問います。<br>
-                                    あなたの帰る場所は、その喧騒に流されていないか。<br>
-                                    ただ寝に帰るだけの「箱」になっていないか。
+                                    福岡という街は、常に新しい何かが生まれ、熱を帯びている。<br><br>
+                                    だからこそ、帰る場所は静謐でありたい。<br>
+                                    外行きの顔を脱ぎ捨て、本来の自分に戻るためのプライベートな空間。<br>
+                                    都市の喧騒と対極にある、安らぎの距離感を大切にしています。
                                 </p>
                             </div>
                         </div>
@@ -259,19 +294,19 @@
             </div>
         </div>
 
-        <!-- BLOCK 2: THE CURATION -->
+        <!-- BLOCK 2: THE CURATION (Texture & Touch) -->
         <div class="max-w-screen-2xl mx-auto mb-32 md:mb-48 relative">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-0 items-center">
                 <div class="order-2 md:order-1 md:col-span-5 md:-mr-20 relative z-10 p-6 md:p-12 reveal-on-scroll delay-200">
                      <div class="bg-white/95 backdrop-blur-sm p-8 md:p-16 border-r border-gabu-brass shadow-xl">
                         <h3 class="font-sans text-4xl md:text-6xl text-gabu-text mb-8 tracking-tighter">
-                            STANDARD<br><span class="text-gabu-brass">& MOOD.</span>
+                            TEXTURE<br><span class="text-gabu-brass">& MOOD.</span>
                         </h3>
                         <p class="text-sm md:text-base text-gabu-text-light leading-loose font-serif text-justify mb-8">
-                            GABU ORIENTは、あなたのライフスタイルのBGMを決める、空間のキュレーターです。<br><br>
-                            心地よいJAZZが空間の質を変えるように。<br>
-                            仕立ての良いジャケットが背筋を伸ばしてくれるように。<br>
-                            住まいは、人生のリズムを整える「楽器」であるべきです。
+                            服を選ぶとき、生地の肌触りを確かめるように。<br>
+                            住まいにおいても、素材の「質感」は嘘をつきません。<br><br>
+                            無骨なコンクリート、使い込まれた真鍮、温かみのある無垢材。<br>
+                            私たちは感性のスタイリストとして、あなたの五感に響く素材感のある物件を厳選します。
                         </p>
                         <span class="font-sans text-gabu-concrete text-xs tracking-widest block text-right">02 — CURATION</span>
                      </div>
@@ -288,7 +323,7 @@
             </div>
         </div>
 
-        <!-- BLOCK 3: THE VINTAGE -->
+        <!-- BLOCK 3: THE VINTAGE (Aging & Attachment) -->
         <div class="max-w-5xl mx-auto px-6 reveal-on-scroll">
             <div class="flex flex-col md:flex-row items-end gap-8 md:gap-16">
                 <div class="w-full md:w-1/2">
@@ -303,13 +338,14 @@
 
                 <div class="w-full md:w-1/2 pb-8">
                     <h3 class="text-3xl md:text-4xl font-serif text-gabu-text mb-8 leading-relaxed">
-                        経年変化という、<br>
-                        <span class="border-b border-gabu-brass pb-1">美学。</span>
+                        時間を、<br>
+                        <span class="border-b border-gabu-brass pb-1">纏う歓び。</span>
                     </h3>
                     <p class="text-sm text-gabu-text-light leading-loose font-serif text-justify mb-8">
-                        新築が全てではない。<br>
-                        時を経た物件だけが持つ「色気」に、あなたの感性を重ねてください。<br><br>
-                        私たちは、福岡中の膨大な不動産の中から、「スペック」ではなく「物語」で物件をセレクトしています。
+                        新品が一番美しいとは限らない。<br>
+                        ヴィンテージデニムが体に馴染んでいくように、<br>
+                        時を経た住まいだけが持つ「深み」があります。<br><br>
+                        傷さえも愛おしくなるような、あなたと共に育つ空間との出会いを。
                     </p>
                     <div class="w-12 h-[1px] bg-gabu-text/20"></div>
                 </div>
