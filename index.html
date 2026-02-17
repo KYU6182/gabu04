@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Oswald:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Oswald:wght@300;400;500&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,22 +19,22 @@
             theme: {
                 extend: {
                     colors: {
-                        'gabu-bg': '#f5f5f2',
-                        'gabu-surface': '#ebebea',
-                        'gabu-text': '#2c2c2c',
+                        'gabu-bg': '#f5f5f2',     /* Warm Greige / Off-white */
+                        'gabu-surface': '#ebebea', /* Slightly darker for cards */
+                        'gabu-text': '#2c2c2c',    /* Soft Charcoal */
                         'gabu-text-light': '#595959',
-                        'gabu-brass': '#b08d55',
+                        'gabu-brass': '#b08d55',   /* Brass Accent */
                         'gabu-brass-dim': '#8a703e',
                         'gabu-concrete': '#a0a0a0',
-                        'gabu-dark-bg': '#0f0f0f',
-                        'gabu-smoke': '#1a1a1a',
+                        'gabu-dark-bg': '#0f0f0f', /* Only for Footer */
                     },
                     fontFamily: {
                         'sans': ['Oswald', 'sans-serif'],
-                        'serif': ['Noto Serif JP', 'serif'],
+                        'jp': ['Noto Sans JP', 'sans-serif'],
                     },
                     letterSpacing: {
                         'widest-xl': '0.25em',
+                        'widest-2xl': '0.5em',
                     },
                     backgroundImage: {
                         'noise': "url('https://grainy-gradients.vercel.app/noise.svg')",
@@ -67,30 +67,47 @@
             color: #fff;
         }
 
-        /* Animations */
+        /* --- Animations --- */
+        
+        /* Reveal Text (Clip Path) */
+        .reveal-text {
+            animation: revealUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            transform: translateY(110%);
+            opacity: 0;
+        }
+        @keyframes revealUp {
+            0% { transform: translateY(110%); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Tracking Expand */
+        .tracking-expand {
+            animation: trackingExpand 1.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards;
+            opacity: 0;
+        }
+        @keyframes trackingExpand {
+            0% { letter-spacing: -0.2em; opacity: 0; }
+            40% { opacity: 0.6; }
+            100% { letter-spacing: 0.1em; opacity: 1; }
+        }
+
+        /* Fade In Up */
         .fade-in-up {
             animation: fadeInUp 1.2s ease-out forwards;
             opacity: 0;
             transform: translateY(20px);
         }
-        
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Delays */
         .delay-200 { animation-delay: 0.2s; }
         .delay-500 { animation-delay: 0.5s; }
         .delay-700 { animation-delay: 0.7s; }
         .delay-1000 { animation-delay: 1.0s; }
 
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .text-focus-in {
-            animation: textFocusIn 2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-        }
-        @keyframes textFocusIn {
-            0% { filter: blur(12px); opacity: 0; transform: scale(1.05); }
-            100% { filter: blur(0px); opacity: 1; transform: scale(1); }
-        }
-
+        /* Ken Burns Effect */
         .ken-burns {
             animation: kenBurns 25s ease-out infinite alternate;
         }
@@ -120,7 +137,7 @@
         }
     </style>
 </head>
-<body class="bg-gabu-bg text-gabu-text font-serif antialiased selection:bg-gabu-brass selection:text-white">
+<body class="bg-gabu-bg text-gabu-text font-jp antialiased selection:bg-gabu-brass selection:text-white">
 
     <!-- Fixed Header -->
     <header class="fixed top-0 left-0 w-full z-50 px-6 py-6 md:px-12 flex justify-between items-center pointer-events-none mix-blend-multiply">
@@ -131,7 +148,7 @@
                  onerror="this.style.display='none'">
             <div>
                 <h1 class="font-sans font-bold text-xl tracking-widest text-gabu-text">GABU ORIENT</h1>
-                <p class="text-[10px] tracking-widest text-gabu-text-light uppercase mt-1">Real Estate / Renovation</p>
+                <p class="text-[10px] tracking-widest text-gabu-text-light uppercase mt-1 font-jp font-medium">Real Estate / Renovation</p>
             </div>
         </div>
         <div class="pointer-events-auto cursor-pointer group">
@@ -151,48 +168,62 @@
             <div class="absolute inset-0 bg-white/40 backdrop-blur-[1px]"></div>
             <div class="absolute inset-0 opacity-30 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuNjUiIG51bW9jdGF2ZXM9IjMiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjbm9pc2UpIiBvcGFjaXR5PSIwLjUiLz48L3N2Zz4=')]"></div>
         </div>
-        <div class="relative z-10 text-center px-4 w-full max-w-5xl mx-auto">
-            <h2 class="font-serif text-4xl md:text-6xl lg:text-7xl font-medium tracking-widest text-gabu-text mb-6 text-focus-in leading-relaxed drop-shadow-sm">
-                住まいを、<br class="md:hidden">纏う。
-            </h2>
-            <p class="font-sans text-xl md:text-2xl tracking-[0.4em] text-gabu-text-light fade-in-up delay-500 font-normal">
-                GABU ORIENT
-            </p>
-            <div class="mt-12 h-[1px] w-16 bg-gabu-brass mx-auto fade-in-up delay-700"></div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 text-center px-4 w-full max-w-5xl mx-auto flex flex-col items-center">
+            
+            <!-- Main Copy -->
+            <div class="mb-6 md:mb-8 overflow-hidden">
+                <h2 class="font-jp font-bold text-[1.75rem] md:text-6xl lg:text-7xl tracking-widest text-gabu-text reveal-text whitespace-nowrap">
+                    住まいを、纏う。
+                </h2>
+            </div>
+            
+            <!-- Brand Name -->
+            <div class="mb-8">
+                <p class="font-sans text-xl md:text-3xl text-gabu-text-light font-medium tracking-expand delay-500">
+                    GABU ORIENT
+                </p>
+            </div>
+
+            <!-- Divider -->
+            <div class="h-[1px] bg-gabu-brass mx-auto animate-[widthGrow_1s_ease-out_forwards_0.8s] w-0"></div>
+            <style>@keyframes widthGrow { to { width: 4rem; } }</style>
         </div>
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-60 animate-bounce">
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-0 w-full flex flex-col items-center justify-center pointer-events-none opacity-60 animate-bounce">
             <span class="text-[10px] tracking-widest mb-2 font-sans text-gabu-text">SCROLL</span>
             <div class="w-[1px] h-12 bg-gabu-text"></div>
         </div>
     </section>
 
-    <!-- 1. ABOUT Section (Homage to IPPO) -->
-    <section class="bg-gabu-dark-bg text-gray-300 py-32 md:py-48 px-6 relative overflow-hidden">
-        <!-- Smoky Texture Overlay -->
-        <div class="absolute inset-0 opacity-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
-        <div class="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-gabu-smoke/50 to-transparent pointer-events-none"></div>
-
+    <!-- 1. ABOUT Section (Updated to Clean/Light Theme) -->
+    <section class="bg-gabu-bg text-gabu-text py-32 md:py-48 px-6 relative overflow-hidden">
+        <!-- Light Noise Texture -->
+        <div class="absolute inset-0 opacity-40 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+        
         <div class="container mx-auto max-w-6xl relative z-10">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center min-h-[50vh]">
                 
-                <!-- Vertical Heading (Left) -->
+                <!-- Vertical Heading (Clean & Strong) -->
                 <div class="mb-16 md:mb-0 md:w-1/3 reveal-on-scroll">
-                    <h2 class="vertical-rl text-4xl md:text-6xl lg:text-7xl font-serif tracking-widest leading-relaxed text-white h-[400px] md:h-[500px] border-l border-white/10 pl-6 md:pl-12">
+                    <h2 class="vertical-rl text-4xl md:text-6xl lg:text-7xl font-jp font-bold tracking-widest leading-relaxed text-gabu-text h-[400px] md:h-[500px] border-l border-gabu-text/10 pl-6 md:pl-12">
                         感性を、<br>
                         <span class="text-gabu-brass">組織する。</span>
                     </h2>
                 </div>
 
-                <!-- Body Text (Right/Center) -->
+                <!-- Body Text (Dark Grey on Light Background) -->
                 <div class="md:w-2/3 md:pl-20 reveal-on-scroll delay-200">
-                    <p class="font-sans text-xs tracking-widest text-gabu-brass mb-8 opacity-80">ABOUT US</p>
+                    <p class="font-sans text-xs tracking-widest text-gabu-brass mb-8 font-medium">ABOUT US</p>
                     
-                    <div class="space-y-12 font-serif text-lg md:text-2xl leading-loose tracking-wider text-justify md:text-left">
+                    <div class="space-y-12 font-jp font-medium text-lg md:text-2xl leading-loose tracking-wider text-justify md:text-left text-gabu-text">
                         <p>
                             個性・感性・創造性を発揮し、<br class="hidden md:block">
                             組織力で挑戦する企業です。
                         </p>
-                        <p class="text-sm md:text-base text-gray-400 leading-loose">
+                        <p class="text-sm md:text-base text-gabu-text-light leading-loose font-normal">
                             私たちは、個人の直感や美意識を何よりも大切にします。<br>
                             しかし、それだけでは届かない場所がある。<br>
                             <br>
@@ -205,7 +236,7 @@
                     </div>
                     
                     <div class="mt-16">
-                        <a href="#" class="inline-block border border-white/20 px-8 py-3 text-xs tracking-widest hover:bg-white hover:text-black transition-all duration-500 font-sans">
+                        <a href="#" class="group inline-block border border-gabu-text/20 px-8 py-3 text-xs tracking-widest hover:bg-gabu-text hover:text-white transition-all duration-500 font-sans">
                             VIEW MORE
                         </a>
                     </div>
@@ -216,18 +247,18 @@
     </section>
 
     <!-- 2. NEWS Section -->
-    <section class="bg-gabu-bg text-gabu-text py-24 px-6 border-b border-gabu-text/5">
+    <section class="bg-gabu-surface text-gabu-text py-24 px-6 border-b border-gabu-text/5">
         <div class="container mx-auto max-w-4xl reveal-on-scroll">
             <div class="flex items-end justify-between mb-12 border-b border-gabu-text/20 pb-4">
                 <h3 class="font-sans text-3xl md:text-4xl tracking-widest uppercase">NEWS</h3>
-                <span class="text-xs font-serif italic text-gabu-text-light">Latest Updates</span>
+                <span class="text-xs font-jp text-gabu-text-light">Latest Updates</span>
             </div>
 
             <ul class="space-y-0">
                 <li class="group border-b border-gabu-text/10 hover:border-gabu-brass transition-colors duration-300">
                     <a href="#" class="block py-6 flex flex-col md:flex-row md:items-center gap-2 md:gap-8">
                         <span class="font-sans text-xs text-gabu-brass tracking-widest w-32">2026.02.17</span>
-                        <span class="font-serif text-sm md:text-base group-hover:text-gabu-brass transition-colors duration-300">
+                        <span class="font-jp text-sm md:text-base group-hover:text-gabu-brass transition-colors duration-300 font-medium">
                             GABU ORIENT Official サイト 開設のお知らせ
                         </span>
                         <span class="ml-auto opacity-0 group-hover:opacity-100 transform -translate-x-4 group-hover:translate-x-0 transition-all duration-300 text-gabu-brass">→</span>
@@ -242,33 +273,29 @@
     </section>
 
     <!-- 3. Real Estate (Projects) Section -->
-    <section class="bg-gabu-surface py-32 px-6">
+    <section class="bg-gabu-bg py-32 px-6">
         <div class="container mx-auto max-w-6xl reveal-on-scroll">
             <div class="mb-16 text-center">
                 <h3 class="font-sans text-3xl md:text-5xl tracking-widest uppercase mb-4 text-gabu-text">PROJECTS</h3>
-                <p class="font-serif text-sm text-gabu-text-light">取扱い物件</p>
+                <p class="font-jp text-sm text-gabu-text-light font-medium">取扱い物件</p>
             </div>
 
-            <!-- Coming Soon Display -->
             <div class="relative w-full h-[60vh] bg-gabu-concrete/10 flex flex-col items-center justify-center border border-gabu-text/5 overflow-hidden group">
-                <!-- Background Image (Blurred) -->
                 <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2370&auto=format&fit=crop" 
                      alt="Coming Soon Background" 
                      class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-105 transition-transform duration-1000 grayscale">
                 
-                <!-- Overlay Text -->
                 <div class="relative z-10 text-center">
                     <span class="block font-sans text-gabu-brass text-xs tracking-[0.3em] mb-4">UNDER PREPARATION</span>
-                    <h4 class="font-serif text-2xl md:text-4xl text-gabu-text tracking-widest mb-8">
+                    <h4 class="font-jp font-bold text-2xl md:text-4xl text-gabu-text tracking-widest mb-8">
                         現在、準備中
                     </h4>
-                    <p class="font-serif text-xs md:text-sm text-gabu-text-light leading-loose">
+                    <p class="font-jp text-xs md:text-sm text-gabu-text-light leading-loose">
                         至高の空間をキュレーションしております。<br>
                         公開まで今しばらくお待ちください。
                     </p>
                 </div>
                 
-                <!-- Decorative Lines -->
                 <div class="absolute top-10 left-10 w-16 h-[1px] bg-gabu-text/20"></div>
                 <div class="absolute bottom-10 right-10 w-16 h-[1px] bg-gabu-text/20"></div>
             </div>
@@ -276,33 +303,29 @@
     </section>
 
     <!-- 4. CONTACT Section -->
-    <section class="bg-gabu-bg py-32 px-6">
+    <section class="bg-gabu-surface py-32 px-6">
         <div class="container mx-auto max-w-3xl reveal-on-scroll">
             <div class="mb-20 text-center">
                 <h3 class="font-sans text-3xl md:text-4xl tracking-widest uppercase mb-4 text-gabu-text">CONTACT</h3>
-                <p class="font-serif text-sm text-gabu-text-light">お問い合わせ</p>
+                <p class="font-jp text-sm text-gabu-text-light font-medium">お問い合わせ</p>
             </div>
 
             <form class="space-y-12">
-                <!-- Name -->
                 <div class="group">
                     <label for="name" class="block font-sans text-xs tracking-widest text-gabu-text-light mb-2 group-focus-within:text-gabu-brass transition-colors">NAME</label>
-                    <input type="text" id="name" class="w-full bg-transparent border-b border-gabu-text/20 py-3 text-gabu-text focus:outline-none focus:border-gabu-brass transition-colors font-serif">
+                    <input type="text" id="name" class="w-full bg-transparent border-b border-gabu-text/20 py-3 text-gabu-text focus:outline-none focus:border-gabu-brass transition-colors font-jp">
                 </div>
 
-                <!-- Email -->
                 <div class="group">
                     <label for="email" class="block font-sans text-xs tracking-widest text-gabu-text-light mb-2 group-focus-within:text-gabu-brass transition-colors">EMAIL</label>
-                    <input type="email" id="email" class="w-full bg-transparent border-b border-gabu-text/20 py-3 text-gabu-text focus:outline-none focus:border-gabu-brass transition-colors font-serif">
+                    <input type="email" id="email" class="w-full bg-transparent border-b border-gabu-text/20 py-3 text-gabu-text focus:outline-none focus:border-gabu-brass transition-colors font-jp">
                 </div>
 
-                <!-- Message -->
                 <div class="group">
                     <label for="message" class="block font-sans text-xs tracking-widest text-gabu-text-light mb-2 group-focus-within:text-gabu-brass transition-colors">MESSAGE</label>
-                    <textarea id="message" rows="4" class="w-full bg-transparent border-b border-gabu-text/20 py-3 text-gabu-text focus:outline-none focus:border-gabu-brass transition-colors font-serif resize-none"></textarea>
+                    <textarea id="message" rows="4" class="w-full bg-transparent border-b border-gabu-text/20 py-3 text-gabu-text focus:outline-none focus:border-gabu-brass transition-colors font-jp resize-none"></textarea>
                 </div>
 
-                <!-- Submit Button -->
                 <div class="text-center pt-8">
                     <button type="button" class="group relative inline-flex items-center justify-center px-12 py-4 bg-gabu-text text-white font-sans text-xs tracking-widest hover:bg-gabu-brass transition-colors duration-500">
                         <span>SEND MESSAGE</span>
@@ -314,10 +337,10 @@
     </section>
 
     <!-- 5. Company Profile (Footer) -->
+    <!-- Footer remains dark for stability and contrast -->
     <footer class="bg-gabu-dark-bg text-gray-300 py-20 px-6 border-t border-white/5 font-sans">
         <div class="container mx-auto max-w-5xl">
             
-            <!-- Footer Logo & Title -->
             <div class="mb-16 text-center md:text-left reveal-on-scroll">
                 <img src="logo-footer.png" 
                      alt="GABU ORIENT Footer Logo" 
@@ -327,34 +350,29 @@
                 <p class="text-xs text-gabu-brass uppercase tracking-widest">Company Profile</p>
             </div>
 
-            <!-- Definition List / Table Layout -->
-            <div class="border-t border-gray-800 reveal-on-scroll delay-200">
+            <div class="border-t border-gray-800 reveal-on-scroll delay-200 font-jp">
                 
-                <!-- Row 1: 商号 -->
                 <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline">
                     <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">商号</div>
-                    <div class="md:col-span-9 text-sm text-gray-200 font-serif leading-relaxed">
+                    <div class="md:col-span-9 text-sm text-gray-200 leading-relaxed font-medium">
                         株式会社 GABU ORIENT<br>
                         <span class="text-xs text-gray-500 font-sans mt-1 block tracking-wider">GABU ORIENT Inc.</span>
                     </div>
                 </div>
 
-                <!-- Row 2: 設立 -->
                 <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline">
                     <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">設立</div>
-                    <div class="md:col-span-9 text-sm text-gray-200 font-serif">[ 20xx年 x月 x日 ]</div>
+                    <div class="md:col-span-9 text-sm text-gray-200 font-medium">[ 20xx年 x月 x日 ]</div>
                 </div>
 
-                <!-- Row 3: 資本金 -->
                 <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline">
                     <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">資本金</div>
-                    <div class="md:col-span-9 text-sm text-gray-200 font-serif">[ x,xxx万円 ]</div>
+                    <div class="md:col-span-9 text-sm text-gray-200 font-medium">[ x,xxx万円 ]</div>
                 </div>
 
-                <!-- Row 4: 本社 -->
                 <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline">
                     <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">本社</div>
-                    <div class="md:col-span-9 text-sm text-gray-200 font-serif leading-loose">
+                    <div class="md:col-span-9 text-sm text-gray-200 leading-loose font-medium">
                         〒812-0054<br>
                         福岡市東区馬出1-24-31-102<br>
                         <a href="https://www.google.com/maps/search/?api=1&query=福岡市東区馬出1-24-31-102" target="_blank" class="inline-flex items-center gap-2 mt-2 text-xs text-gabu-brass hover:text-white transition-colors font-sans tracking-wider border-b border-gabu-brass/50 pb-0.5">
@@ -363,16 +381,14 @@
                     </div>
                 </div>
 
-                <!-- Row 5: 代表者 -->
                 <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline">
                     <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">代表者</div>
-                    <div class="md:col-span-9 text-sm text-gray-200 font-serif">代表取締役　篠原 三樹博</div>
+                    <div class="md:col-span-9 text-sm text-gray-200 font-medium">代表取締役　篠原 三樹博</div>
                 </div>
 
-                <!-- Row 6: 事業内容 -->
                 <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline">
                     <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">事業内容</div>
-                    <div class="md:col-span-9 text-sm text-gray-200 font-serif leading-loose">
+                    <div class="md:col-span-9 text-sm text-gray-200 leading-loose font-medium">
                         <ul class="list-none space-y-1">
                             <li>不動産の売買・仲介・管理</li>
                             <li>リノベーションの企画・設計・施工</li>
@@ -382,16 +398,14 @@
                     </div>
                 </div>
 
-                <!-- Row 7: 許認可等 -->
                 <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline">
                     <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">許認可等</div>
-                    <div class="md:col-span-9 text-sm text-gray-200 font-serif">宅地建物取引業者免許 福岡県知事（1）第21024号</div>
+                    <div class="md:col-span-9 text-sm text-gray-200 font-medium">宅地建物取引業者免許 福岡県知事（1）第21024号</div>
                 </div>
 
-                <!-- Row 8: 連絡先 -->
                 <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline">
                     <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">連絡先</div>
-                    <div class="md:col-span-9 text-sm text-gray-200 font-serif tracking-wide leading-loose">
+                    <div class="md:col-span-9 text-sm text-gray-200 tracking-wide leading-loose font-medium">
                         <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-8 mb-2">
                             <div><span class="text-gray-500 mr-2 font-sans text-xs">Tel:</span><a href="tel:0925156178" class="hover:text-gabu-brass">092-515-6178</a></div>
                             <div><span class="text-gray-500 mr-2 font-sans text-xs">Fax:</span>092-206-8029</div>
@@ -405,7 +419,6 @@
 
             </div>
 
-            <!-- Bottom: Copyright & Links -->
             <div class="flex flex-col md:flex-row justify-between items-center pt-12 mt-12 text-[10px] tracking-widest uppercase text-gray-600">
                 <p>&copy; 2026 GABU ORIENT Inc. All Rights Reserved.</p>
                 <div class="flex gap-6 mt-4 md:mt-0">
