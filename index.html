@@ -24,9 +24,8 @@
                         'gabu-text': '#2c2c2c',    /* Soft Charcoal */
                         'gabu-text-light': '#595959',
                         'gabu-brass': '#b08d55',   /* Brass Accent */
-                        'gabu-brass-dim': '#8a703e',
-                        'gabu-concrete': '#a0a0a0',
-                        'gabu-dark-bg': '#0f0f0f', /* Only for Footer */
+                        'gabu-orange': '#e67e22',  /* Logo Accent Orange */
+                        'gabu-dark-bg': '#0f0f0f', /* Footer */
                     },
                     fontFamily: {
                         'sans': ['Oswald', 'sans-serif'],
@@ -38,6 +37,25 @@
                     },
                     backgroundImage: {
                         'noise': "url('https://grainy-gradients.vercel.app/noise.svg')",
+                    },
+                    animation: {
+                        'float-slow': 'float 20s ease-in-out infinite',
+                        'float-medium': 'float 15s ease-in-out infinite reverse',
+                        'float-fast': 'float 10s ease-in-out infinite',
+                        'spin-slow': 'spin 30s linear infinite',
+                        'morph': 'morph 15s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) translateX(0) rotate(0deg)' },
+                            '33%': { transform: 'translateY(-30px) translateX(20px) rotate(5deg)' },
+                            '66%': { transform: 'translateY(20px) translateX(-10px) rotate(-5deg)' },
+                        },
+                        morph: {
+                            '0%': { borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' },
+                            '50%': { borderRadius: '30% 60% 70% 40% / 50% 60% 30% 60%' },
+                            '100%': { borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' },
+                        }
                     }
                 }
             }
@@ -68,8 +86,6 @@
         }
 
         /* --- Animations --- */
-        
-        /* Reveal Text (Clip Path) */
         .reveal-text {
             animation: revealUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             transform: translateY(110%);
@@ -80,18 +96,6 @@
             100% { transform: translateY(0); opacity: 1; }
         }
 
-        /* Tracking Expand */
-        .tracking-expand {
-            animation: trackingExpand 1.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards;
-            opacity: 0;
-        }
-        @keyframes trackingExpand {
-            0% { letter-spacing: -0.2em; opacity: 0; }
-            40% { opacity: 0.6; }
-            100% { letter-spacing: 0.1em; opacity: 1; }
-        }
-
-        /* Fade In Up */
         .fade-in-up {
             animation: fadeInUp 1.2s ease-out forwards;
             opacity: 0;
@@ -101,22 +105,11 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Delays */
         .delay-200 { animation-delay: 0.2s; }
         .delay-500 { animation-delay: 0.5s; }
         .delay-700 { animation-delay: 0.7s; }
         .delay-1000 { animation-delay: 1.0s; }
 
-        /* Ken Burns Effect */
-        .ken-burns {
-            animation: kenBurns 25s ease-out infinite alternate;
-        }
-        @keyframes kenBurns {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.15); }
-        }
-
-        /* Scroll Reveal */
         .reveal-on-scroll {
             opacity: 1;
             transition: opacity 1.2s ease-out, transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -130,10 +123,26 @@
             transform: translateY(0) !important;
         }
 
-        /* Vertical Text */
         .vertical-rl {
             writing-mode: vertical-rl;
             text-orientation: upright;
+        }
+
+        /* Shape Animations */
+        .shape-container {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .shape {
+            position: absolute;
+            opacity: 0.8;
+            mix-blend-mode: multiply;
+        }
+        .shape-blur {
+            filter: blur(40px);
         }
     </style>
 </head>
@@ -142,9 +151,10 @@
     <!-- Fixed Header -->
     <header class="fixed top-0 left-0 w-full z-50 px-6 py-6 md:px-12 flex justify-between items-center pointer-events-none mix-blend-multiply">
         <div class="pointer-events-auto flex items-center gap-4">
-            <img src="logo-header.png" 
+            <!-- Updated to .jpg as per user upload -->
+            <img src="logo-header.jpg" 
                  alt="GABU ORIENT Logo" 
-                 class="h-10 w-auto object-contain"
+                 class="h-10 w-auto object-contain mix-blend-darken"
                  onerror="this.style.display='none'">
             <div>
                 <h1 class="font-sans font-bold text-xl tracking-widest text-gabu-text">GABU ORIENT</h1>
@@ -157,31 +167,47 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <div class="w-full h-full overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=2370&auto=format&fit=crop" 
-                     alt="Bright Renovation Interior" 
-                     class="w-full h-full object-cover opacity-90 ken-burns">
+    <!-- Hero Section (Animated Shapes) -->
+    <section class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-gabu-bg">
+        
+        <!-- Animated Background Shapes -->
+        <div class="shape-container">
+            <!-- 1. The Orange Dot (Logo Motif) - Floating & Morphing -->
+            <div class="shape w-64 h-64 md:w-96 md:h-96 bg-gabu-orange/20 rounded-full top-[20%] left-[10%] animate-float-slow shape-blur"></div>
+            
+            <!-- 2. The House/Frame Lines (Architectural Motif) - Rotating -->
+            <div class="shape w-[30rem] h-[30rem] border border-gabu-text/10 top-[40%] right-[10%] rotate-12 animate-float-medium rounded-[3rem]"></div>
+            
+            <!-- 3. Large Circle (Brass/Atmosphere) -->
+            <div class="shape w-[40rem] h-[40rem] bg-gabu-brass/10 rounded-full -bottom-[10%] -left-[10%] animate-float-slow shape-blur"></div>
+            
+            <!-- 4. Small Accent Triangle (Sharpness) -->
+            <div class="shape top-[15%] right-[20%] animate-float-fast opacity-40">
+                <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+                    <path d="M50 0L100 100H0L50 0Z" fill="#2c2c2c" fill-opacity="0.05"/>
+                </svg>
             </div>
-            <div class="absolute inset-0 bg-white/40 backdrop-blur-[1px]"></div>
-            <div class="absolute inset-0 opacity-30 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuNjUiIG51bW9jdGF2ZXM9IjMiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjbm9pc2UpIiBvcGFjaXR5PSIwLjUiLz48L3N2Zz4=')]"></div>
+
+            <!-- 5. Rotating Outline Circle (Connection) -->
+            <div class="shape w-80 h-80 border border-gabu-orange/30 rounded-full top-[30%] left-[40%] animate-spin-slow" style="border-style: dashed;"></div>
         </div>
+
+        <!-- Light Noise Texture Overlay -->
+        <div class="absolute inset-0 opacity-30 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] z-0 pointer-events-none"></div>
 
         <!-- Hero Content -->
         <div class="relative z-10 text-center px-4 w-full max-w-5xl mx-auto flex flex-col items-center">
             
             <!-- Main Copy -->
             <div class="mb-6 md:mb-8 overflow-hidden">
-                <h2 class="font-jp font-bold text-[1.75rem] md:text-6xl lg:text-7xl tracking-widest text-gabu-text reveal-text whitespace-nowrap">
+                <h2 class="font-jp font-bold text-[1.75rem] md:text-6xl lg:text-7xl tracking-widest text-gabu-text reveal-text whitespace-nowrap drop-shadow-sm">
                     住まいを、纏う。
                 </h2>
             </div>
             
             <!-- Brand Name -->
             <div class="mb-8">
-                <p class="font-sans text-xl md:text-3xl text-gabu-text-light font-medium tracking-expand delay-500">
+                <p class="font-sans text-xl md:text-3xl text-gabu-text-light font-medium tracking-[0.2em] fade-in-up delay-500">
                     GABU ORIENT
                 </p>
             </div>
@@ -192,21 +218,20 @@
         </div>
 
         <!-- Scroll Indicator -->
-        <div class="absolute bottom-10 left-0 w-full flex flex-col items-center justify-center pointer-events-none opacity-60 animate-bounce">
+        <div class="absolute bottom-10 left-0 w-full flex flex-col items-center justify-center pointer-events-none opacity-60 animate-bounce z-20">
             <span class="text-[10px] tracking-widest mb-2 font-sans text-gabu-text">SCROLL</span>
             <div class="w-[1px] h-12 bg-gabu-text"></div>
         </div>
     </section>
 
-    <!-- 1. ABOUT Section (Updated to Clean/Light Theme) -->
+    <!-- 1. ABOUT Section -->
     <section class="bg-gabu-bg text-gabu-text py-32 md:py-48 px-6 relative overflow-hidden">
-        <!-- Light Noise Texture -->
         <div class="absolute inset-0 opacity-40 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
         
         <div class="container mx-auto max-w-6xl relative z-10">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center min-h-[50vh]">
                 
-                <!-- Vertical Heading (Clean & Strong) -->
+                <!-- Vertical Heading -->
                 <div class="mb-16 md:mb-0 md:w-1/3 reveal-on-scroll">
                     <h2 class="vertical-rl text-4xl md:text-6xl lg:text-7xl font-jp font-bold tracking-widest leading-relaxed text-gabu-text h-[400px] md:h-[500px] border-l border-gabu-text/10 pl-6 md:pl-12">
                         感性を、<br>
@@ -214,7 +239,7 @@
                     </h2>
                 </div>
 
-                <!-- Body Text (Dark Grey on Light Background) -->
+                <!-- Body Text -->
                 <div class="md:w-2/3 md:pl-20 reveal-on-scroll delay-200">
                     <p class="font-sans text-xs tracking-widest text-gabu-brass mb-8 font-medium">ABOUT US</p>
                     
@@ -337,7 +362,6 @@
     </section>
 
     <!-- 5. Company Profile (Footer) -->
-    <!-- Footer remains dark for stability and contrast -->
     <footer class="bg-gabu-dark-bg text-gray-300 py-20 px-6 border-t border-white/5 font-sans">
         <div class="container mx-auto max-w-5xl">
             
