@@ -105,19 +105,24 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-500 { animation-delay: 0.5s; }
-        .delay-700 { animation-delay: 0.7s; }
-        .delay-1000 { animation-delay: 1.0s; }
+        /* Delays for Staggered Animation */
+        .delay-100 { transition-delay: 0.1s; animation-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; animation-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; animation-delay: 0.3s; }
+        .delay-400 { transition-delay: 0.4s; animation-delay: 0.4s; }
+        .delay-500 { transition-delay: 0.5s; animation-delay: 0.5s; }
+        .delay-700 { transition-delay: 0.7s; animation-delay: 0.7s; }
+        .delay-1000 { transition-delay: 1.0s; animation-delay: 1.0s; }
 
+        /* Scroll Reveal - Cinematic Float Up */
         .reveal-on-scroll {
-            opacity: 1;
-            transition: opacity 1.2s ease-out, transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            opacity: 0; /* Default hidden */
+            transform: translateY(40px); /* Start slightly lower */
+            /* Using a sophisticated cubic-bezier for a "floaty" and premium feel */
+            transition: opacity 1.5s cubic-bezier(0.23, 1, 0.32, 1), transform 1.5s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: opacity, transform;
         }
-        .js-scroll-hidden {
-            opacity: 0;
-            transform: translateY(40px);
-        }
+        
         .reveal-visible {
             opacity: 1 !important;
             transform: translateY(0) !important;
@@ -245,15 +250,15 @@
                 </div>
 
                 <!-- Body Text -->
-                <div class="md:w-2/3 md:pl-20 reveal-on-scroll delay-200">
-                    <p class="font-sans text-xs tracking-widest text-gabu-brass mb-8 font-medium">ABOUT US</p>
+                <div class="md:w-2/3 md:pl-20">
+                    <p class="font-sans text-xs tracking-widest text-gabu-brass mb-8 font-medium reveal-on-scroll delay-100">ABOUT US</p>
                     
                     <div class="space-y-12 font-jp font-medium text-lg md:text-2xl leading-loose tracking-wider text-justify md:text-left text-gabu-text">
-                        <p>
+                        <p class="reveal-on-scroll delay-200">
                             個性・感性・創造性を発揮し、<br class="hidden md:block">
                             組織力で挑戦する企業です。
                         </p>
-                        <p class="text-sm md:text-base text-gabu-text-light leading-loose font-normal">
+                        <p class="text-sm md:text-base text-gabu-text-light leading-loose font-normal reveal-on-scroll delay-300">
                             私たちは、個人の直感や美意識を何よりも大切にします。<br>
                             しかし、それだけでは届かない場所がある。<br>
                             <br>
@@ -265,7 +270,7 @@
                         </p>
                     </div>
                     
-                    <div class="mt-16">
+                    <div class="mt-16 reveal-on-scroll delay-400">
                         <a href="#" class="group inline-block border border-gabu-text/20 px-8 py-3 text-xs tracking-widest hover:bg-gabu-text hover:text-white transition-all duration-500 font-sans">
                             VIEW MORE
                         </a>
@@ -278,14 +283,14 @@
 
     <!-- 2. NEWS Section -->
     <section class="bg-gabu-surface text-gabu-text py-24 px-6 border-b border-gabu-text/5">
-        <div class="container mx-auto max-w-4xl reveal-on-scroll">
-            <div class="flex items-end justify-between mb-12 border-b border-gabu-text/20 pb-4">
+        <div class="container mx-auto max-w-4xl">
+            <div class="flex items-end justify-between mb-12 border-b border-gabu-text/20 pb-4 reveal-on-scroll">
                 <h3 class="font-sans text-3xl md:text-4xl tracking-widest uppercase">NEWS</h3>
                 <span class="text-xs font-jp text-gabu-text-light">Latest Updates</span>
             </div>
 
             <ul class="space-y-0">
-                <li class="group border-b border-gabu-text/10 hover:border-gabu-brass transition-colors duration-300">
+                <li class="group border-b border-gabu-text/10 hover:border-gabu-brass transition-colors duration-300 reveal-on-scroll delay-100">
                     <a href="#" class="block py-6 flex flex-col md:flex-row md:items-center gap-2 md:gap-8">
                         <span class="font-sans text-xs text-gabu-brass tracking-widest w-32">2026.02.17</span>
                         <span class="font-jp text-sm md:text-base group-hover:text-gabu-brass transition-colors duration-300 font-medium">
@@ -296,7 +301,7 @@
                 </li>
             </ul>
             
-            <div class="mt-12 text-right">
+            <div class="mt-12 text-right reveal-on-scroll delay-200">
                 <a href="#" class="text-xs font-sans tracking-widest border-b border-gabu-text/30 hover:border-gabu-brass hover:text-gabu-brass transition-colors pb-1">VIEW ALL NEWS</a>
             </div>
         </div>
@@ -304,23 +309,23 @@
 
     <!-- 3. Real Estate (Projects) Section -->
     <section class="bg-gabu-bg py-32 px-6">
-        <div class="container mx-auto max-w-6xl reveal-on-scroll">
-            <div class="mb-16 text-center">
+        <div class="container mx-auto max-w-6xl">
+            <div class="mb-16 text-center reveal-on-scroll">
                 <h3 class="font-sans text-3xl md:text-5xl tracking-widest uppercase mb-4 text-gabu-text">PROJECTS</h3>
                 <p class="font-jp text-sm text-gabu-text-light font-medium">取扱い物件</p>
             </div>
 
-            <div class="relative w-full h-[60vh] bg-gabu-concrete/10 flex flex-col items-center justify-center border border-gabu-text/5 overflow-hidden group">
+            <div class="relative w-full h-[60vh] bg-gabu-concrete/10 flex flex-col items-center justify-center border border-gabu-text/5 overflow-hidden group reveal-on-scroll delay-200">
                 <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2370&auto=format&fit=crop" 
                      alt="Coming Soon Background" 
                      class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-105 transition-transform duration-1000 grayscale">
                 
                 <div class="relative z-10 text-center">
-                    <span class="block font-sans text-gabu-brass text-xs tracking-[0.3em] mb-4">UNDER PREPARATION</span>
-                    <h4 class="font-jp font-bold text-2xl md:text-4xl text-gabu-text tracking-widest mb-8">
+                    <span class="block font-sans text-gabu-brass text-xs tracking-[0.3em] mb-4 reveal-on-scroll delay-300">UNDER PREPARATION</span>
+                    <h4 class="font-jp font-bold text-2xl md:text-4xl text-gabu-text tracking-widest mb-8 reveal-on-scroll delay-400">
                         現在、準備中
                     </h4>
-                    <p class="font-jp text-xs md:text-sm text-gabu-text-light leading-loose">
+                    <p class="font-jp text-xs md:text-sm text-gabu-text-light leading-loose reveal-on-scroll delay-500">
                         至高の空間をキュレーションしております。<br>
                         公開まで今しばらくお待ちください。
                     </p>
@@ -334,29 +339,29 @@
 
     <!-- 4. CONTACT Section -->
     <section class="bg-gabu-surface py-32 px-6">
-        <div class="container mx-auto max-w-3xl reveal-on-scroll">
-            <div class="mb-20 text-center">
+        <div class="container mx-auto max-w-3xl">
+            <div class="mb-20 text-center reveal-on-scroll">
                 <h3 class="font-sans text-3xl md:text-4xl tracking-widest uppercase mb-4 text-gabu-text">CONTACT</h3>
                 <p class="font-jp text-sm text-gabu-text-light font-medium">お問い合わせ</p>
             </div>
 
             <form class="space-y-12">
-                <div class="group">
+                <div class="group reveal-on-scroll delay-100">
                     <label for="name" class="block font-sans text-xs tracking-widest text-gabu-text-light mb-2 group-focus-within:text-gabu-brass transition-colors">NAME</label>
                     <input type="text" id="name" class="w-full bg-transparent border-b border-gabu-text/20 py-3 text-gabu-text focus:outline-none focus:border-gabu-brass transition-colors font-jp">
                 </div>
 
-                <div class="group">
+                <div class="group reveal-on-scroll delay-200">
                     <label for="email" class="block font-sans text-xs tracking-widest text-gabu-text-light mb-2 group-focus-within:text-gabu-brass transition-colors">EMAIL</label>
                     <input type="email" id="email" class="w-full bg-transparent border-b border-gabu-text/20 py-3 text-gabu-text focus:outline-none focus:border-gabu-brass transition-colors font-jp">
                 </div>
 
-                <div class="group">
+                <div class="group reveal-on-scroll delay-300">
                     <label for="message" class="block font-sans text-xs tracking-widest text-gabu-text-light mb-2 group-focus-within:text-gabu-brass transition-colors">MESSAGE</label>
                     <textarea id="message" rows="4" class="w-full bg-transparent border-b border-gabu-text/20 py-3 text-gabu-text focus:outline-none focus:border-gabu-brass transition-colors font-jp resize-none"></textarea>
                 </div>
 
-                <div class="text-center pt-8">
+                <div class="text-center pt-8 reveal-on-scroll delay-400">
                     <button type="button" class="group relative inline-flex items-center justify-center px-12 py-4 bg-gabu-text text-white font-sans text-xs tracking-widest hover:bg-gabu-brass transition-colors duration-500">
                         <span>SEND MESSAGE</span>
                         <span class="absolute w-full h-full border border-gabu-text group-hover:border-gabu-brass top-1 left-1 -z-10 transition-all duration-300 group-hover:top-0 group-hover:left-0"></span>
@@ -379,9 +384,9 @@
                 <p class="text-xs text-gabu-brass uppercase tracking-widest">Company Profile</p>
             </div>
 
-            <div class="border-t border-gray-800 reveal-on-scroll delay-200 font-jp">
+            <div class="border-t border-gray-800 font-jp">
                 
-                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline">
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline reveal-on-scroll delay-100">
                     <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">商号</div>
                     <div class="md:col-span-9 text-sm text-gray-200 leading-relaxed font-medium">
                         株式会社 GABU ORIENT<br>
@@ -389,17 +394,17 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline">
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline reveal-on-scroll delay-200">
                     <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">設立</div>
                     <div class="md:col-span-9 text-sm text-gray-200 font-medium">[ 20xx年 x月 x日 ]</div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline">
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline reveal-on-scroll delay-300">
                     <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">資本金</div>
                     <div class="md:col-span-9 text-sm text-gray-200 font-medium">[ x,xxx万円 ]</div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline">
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline reveal-on-scroll delay-400">
                     <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">本社</div>
                     <div class="md:col-span-9 text-sm text-gray-200 leading-loose font-medium">
                         〒812-0054<br>
@@ -410,12 +415,12 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline">
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline reveal-on-scroll delay-500">
                     <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">代表者</div>
                     <div class="md:col-span-9 text-sm text-gray-200 font-medium">代表取締役　篠原 三樹博</div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline">
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline reveal-on-scroll delay-700">
                     <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">事業内容</div>
                     <div class="md:col-span-9 text-sm text-gray-200 leading-loose font-medium">
                         <ul class="list-none space-y-1">
@@ -427,12 +432,12 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline">
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline reveal-on-scroll delay-700">
                     <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">許認可等</div>
                     <div class="md:col-span-9 text-sm text-gray-200 font-medium">宅地建物取引業者免許 福岡県知事（1）第21024号</div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline">
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline reveal-on-scroll delay-700">
                     <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">連絡先</div>
                     <div class="md:col-span-9 text-sm text-gray-200 tracking-wide leading-loose font-medium">
                         <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-8 mb-2">
@@ -448,7 +453,7 @@
 
             </div>
 
-            <div class="flex flex-col md:flex-row justify-between items-center pt-12 mt-12 text-[10px] tracking-widest uppercase text-gray-600">
+            <div class="flex flex-col md:flex-row justify-between items-center pt-12 mt-12 text-[10px] tracking-widest uppercase text-gray-600 reveal-on-scroll delay-1000">
                 <p>&copy; 2026 GABU ORIENT Inc. All Rights Reserved.</p>
                 <div class="flex gap-6 mt-4 md:mt-0">
                     <a href="#" class="hover:text-white transition-colors">ABOUT</a>
