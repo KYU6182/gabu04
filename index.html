@@ -39,17 +39,17 @@
                         'noise': "url('https://grainy-gradients.vercel.app/noise.svg')",
                     },
                     animation: {
-                        'float-slow': 'float 20s ease-in-out infinite',
-                        'float-medium': 'float 15s ease-in-out infinite reverse',
-                        'float-fast': 'float 10s ease-in-out infinite',
-                        'spin-slow': 'spin 30s linear infinite',
+                        'float-slow': 'float 25s ease-in-out infinite',
+                        'float-medium': 'float 18s ease-in-out infinite reverse',
+                        'float-fast': 'float 12s ease-in-out infinite',
+                        'spin-slow': 'spin 40s linear infinite',
                         'morph': 'morph 15s ease-in-out infinite alternate',
                     },
                     keyframes: {
                         float: {
-                            '0%, 100%': { transform: 'translateY(0) translateX(0) rotate(0deg)' },
-                            '33%': { transform: 'translateY(-30px) translateX(20px) rotate(5deg)' },
-                            '66%': { transform: 'translateY(20px) translateX(-10px) rotate(-5deg)' },
+                            '0%, 100%': { transform: 'translate(0, 0) rotate(0deg)' },
+                            '33%': { transform: 'translate(30px, -50px) rotate(5deg)' },
+                            '66%': { transform: 'translate(-20px, 20px) rotate(-5deg)' },
                         },
                         morph: {
                             '0%': { borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' },
@@ -170,26 +170,31 @@
     <!-- Hero Section (Animated Shapes) -->
     <section class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-gabu-bg">
         
-        <!-- Animated Background Shapes -->
+        <!-- Animated Background Shapes (Geometric Float) -->
         <div class="shape-container">
-            <!-- 1. The Orange Dot (Logo Motif) - Floating & Morphing -->
-            <div class="shape w-64 h-64 md:w-96 md:h-96 bg-gabu-orange/20 rounded-full top-[20%] left-[10%] animate-float-slow shape-blur"></div>
+            <!-- 1. Logo Motif: Orange Dot (Floating & Morphing) - Focus -->
+            <div class="shape w-40 h-40 md:w-64 md:h-64 bg-gabu-orange/20 rounded-full top-[15%] left-[10%] animate-float-slow shape-blur mix-blend-multiply"></div>
             
-            <!-- 2. The House/Frame Lines (Architectural Motif) - Rotating -->
-            <div class="shape w-[30rem] h-[30rem] border border-gabu-text/10 top-[40%] right-[10%] rotate-12 animate-float-medium rounded-[3rem]"></div>
+            <!-- 2. Architectural Line: House Frame (Rotating) -->
+            <div class="shape w-[20rem] h-[20rem] md:w-[30rem] md:h-[30rem] border border-gabu-text/5 top-[35%] right-[5%] rotate-12 animate-float-medium rounded-[2rem] md:rounded-[3rem]"></div>
             
-            <!-- 3. Large Circle (Brass/Atmosphere) -->
-            <div class="shape w-[40rem] h-[40rem] bg-gabu-brass/10 rounded-full -bottom-[10%] -left-[10%] animate-float-slow shape-blur"></div>
+            <!-- 3. Atmosphere: Large Brass Circle (Background Depth) -->
+            <div class="shape w-[30rem] h-[30rem] md:w-[40rem] md:h-[40rem] bg-gabu-brass/10 rounded-full -bottom-[10%] -left-[10%] animate-float-slow shape-blur"></div>
             
-            <!-- 4. Small Accent Triangle (Sharpness) -->
-            <div class="shape top-[15%] right-[20%] animate-float-fast opacity-40">
-                <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
-                    <path d="M50 0L100 100H0L50 0Z" fill="#2c2c2c" fill-opacity="0.05"/>
-                </svg>
-            </div>
+            <!-- 4. Geometric: Triangle (Sharpness) -->
+            <div class="shape w-32 h-32 md:w-48 md:h-48 bg-gabu-text/5 top-[20%] right-[25%] animate-float-fast" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%);"></div>
 
-            <!-- 5. Rotating Outline Circle (Connection) -->
-            <div class="shape w-80 h-80 border border-gabu-orange/30 rounded-full top-[30%] left-[40%] animate-spin-slow" style="border-style: dashed;"></div>
+            <!-- 5. Geometric: Square (Rotated Accent) -->
+            <div class="shape w-20 h-20 md:w-32 md:h-32 bg-gabu-brass/20 top-[60%] left-[20%] rotate-45 animate-float-medium blur-sm"></div>
+
+            <!-- 6. Geometric: Small Orange Circle (Detail) -->
+            <div class="shape w-16 h-16 md:w-24 md:h-24 bg-gabu-orange/10 rounded-full top-[80%] right-[30%] animate-float-fast"></div>
+
+            <!-- 7. Connection: Dashed Orbit (Movement) -->
+            <div class="shape w-64 h-64 md:w-96 md:h-96 border border-gabu-text/10 rounded-full top-[10%] left-[40%] animate-spin-slow" style="border-style: dashed;"></div>
+            
+            <!-- 8. Geometric: Inverted Triangle (Bottom Layer) -->
+             <div class="shape w-64 h-64 md:w-96 md:h-96 bg-gabu-surface/80 bottom-[5%] right-[5%] animate-float-slow opacity-30" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%); transform: rotate(180deg);"></div>
         </div>
 
         <!-- Light Noise Texture Overlay -->
