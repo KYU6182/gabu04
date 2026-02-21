@@ -5,15 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GABU ORIENT | Curate Your Life</title>
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Oswald:wght@300;400;500&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
             theme: {
@@ -25,7 +22,7 @@
                         'gabu-text-light': '#595959',
                         'gabu-brass': '#b08d55',   /* Brass Accent */
                         'gabu-orange': '#e67e22',  /* Logo Accent Orange */
-                        'gabu-dark-bg': '#0f0f0f', /* Footer */
+                        'gabu-dark-bg': '#4A3B32', /* Footer (Warm Earthy Brown) */
                     },
                     fontFamily: {
                         'sans': ['Oswald', 'sans-serif'],
@@ -62,7 +59,6 @@
         }
     </script>
 
-    <!-- Custom Styles -->
     <style>
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
@@ -153,10 +149,8 @@
 </head>
 <body class="bg-gabu-bg text-gabu-text font-jp antialiased selection:bg-gabu-brass selection:text-white">
 
-    <!-- Fixed Header -->
     <header class="fixed top-0 left-0 w-full z-50 px-6 py-6 md:px-12 flex justify-between items-center pointer-events-none mix-blend-multiply">
         <div class="pointer-events-auto flex items-center gap-4">
-            <!-- Restored logo-header.png -->
             <img src="logo-header.png" 
                  alt="GABU ORIENT Logo" 
                  class="h-10 w-auto object-contain mix-blend-darken"
@@ -171,112 +165,72 @@
         </div>
     </header>
 
-    <!-- Hero Section (Animated Shapes) -->
     <section class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-gabu-bg">
         
-        <!-- Animated Background Shapes (Geometric Float) -->
         <div class="shape-container">
-            <!-- 1. Logo Motif: Orange Dot (Floating & Morphing) - Focus -->
             <div class="shape w-40 h-40 md:w-64 md:h-64 bg-gabu-orange/20 rounded-full top-[15%] left-[10%] animate-float-slow shape-blur mix-blend-multiply"></div>
             
-            <!-- 2. Architectural Line: House Frame (Rotating) -->
             <div class="shape w-[20rem] h-[20rem] md:w-[30rem] md:h-[30rem] border border-gabu-text/5 top-[35%] right-[5%] rotate-12 animate-float-medium rounded-[2rem] md:rounded-[3rem]"></div>
             
-            <!-- 3. Atmosphere: Large Brass Circle (Background Depth) -->
             <div class="shape w-[30rem] h-[30rem] md:w-[40rem] md:h-[40rem] bg-gabu-brass/10 rounded-full -bottom-[10%] -left-[10%] animate-float-slow shape-blur"></div>
             
-            <!-- 4. Geometric: Triangle (Sharpness) -->
             <div class="shape w-32 h-32 md:w-48 md:h-48 bg-gabu-text/5 top-[20%] right-[25%] animate-float-fast" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%);"></div>
 
-            <!-- 5. Geometric: Square (Rotated Accent) -->
             <div class="shape w-20 h-20 md:w-32 md:h-32 bg-gabu-brass/20 top-[60%] left-[20%] rotate-45 animate-float-medium blur-sm"></div>
 
-            <!-- 6. Geometric: Small Orange Circle (Detail) -->
             <div class="shape w-16 h-16 md:w-24 md:h-24 bg-gabu-orange/10 rounded-full top-[80%] right-[30%] animate-float-fast"></div>
 
-            <!-- 7. Connection: Dashed Orbit (Movement) -->
             <div class="shape w-64 h-64 md:w-96 md:h-96 border border-gabu-text/10 rounded-full top-[10%] left-[40%] animate-spin-slow" style="border-style: dashed;"></div>
             
-            <!-- 8. Geometric: Inverted Triangle (Bottom Layer) -->
-             <div class="shape w-64 h-64 md:w-96 md:h-96 bg-gabu-surface/80 bottom-[5%] right-[5%] animate-float-slow opacity-30" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%); transform: rotate(180deg);"></div>
+            <div class="shape w-64 h-64 md:w-96 md:h-96 bg-gabu-surface/80 bottom-[5%] right-[5%] animate-float-slow opacity-30" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%); transform: rotate(180deg);"></div>
         </div>
 
-        <!-- Light Noise Texture Overlay -->
         <div class="absolute inset-0 opacity-30 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] z-0 pointer-events-none"></div>
 
-        <!-- Hero Content -->
         <div class="relative z-10 text-center px-4 w-full max-w-5xl mx-auto flex flex-col items-center">
             
-            <!-- Main Copy -->
             <div class="mb-6 md:mb-8 overflow-hidden">
                 <h2 class="font-jp font-bold text-[1.75rem] md:text-6xl lg:text-7xl tracking-widest text-gabu-text reveal-text whitespace-nowrap drop-shadow-sm">
- 癒しの家と<br>
-                    楽しい人生<br>
-                    <br>
-                    <br>
-                </h2>
+                    癒しの家と<br><br>                    楽しい人生<br><br>                    <br><br>                    <br><br>                </h2>
             </div>
             
-            <!-- Brand Name -->
             <div class="mb-8">
                 <p class="font-sans text-xl md:text-3xl text-gabu-text-light font-medium tracking-[0.2em] fade-in-up delay-500">
                     GABU ORIENT
                 </p>
             </div>
 
-            <!-- Divider -->
             <div class="h-[1px] bg-gabu-brass mx-auto animate-[widthGrow_1s_ease-out_forwards_0.8s] w-0"></div>
             <style>@keyframes widthGrow { to { width: 4rem; } }</style>
         </div>
 
-        <!-- Scroll Indicator -->
         <div class="absolute bottom-10 left-0 w-full flex flex-col items-center justify-center pointer-events-none opacity-60 animate-bounce z-20">
             <span class="text-[10px] tracking-widest mb-2 font-sans text-gabu-text">SCROLL</span>
             <div class="w-[1px] h-12 bg-gabu-text"></div>
         </div>
     </section>
 
-    <!-- 1. ABOUT Section -->
     <section class="bg-gabu-bg text-gabu-text py-32 md:py-48 px-6 relative overflow-hidden">
         <div class="absolute inset-0 opacity-40 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
         
         <div class="container mx-auto max-w-6xl relative z-10">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center min-h-[50vh]">
                 
-                <!-- Vertical Heading -->
                 <div class="mb-16 md:mb-0 md:w-1/3 reveal-on-scroll">
                     <h2 class="vertical-rl text-4xl md:text-6xl lg:text-7xl font-jp font-bold tracking-widest leading-relaxed text-gabu-text h-[400px] md:h-[500px] border-l border-gabu-text/10 pl-6 md:pl-12">
-                        想いを、<br>
-                        <span class="text-gabu-brass">カタチに。</span>
+                        想いを、<br><br>                        <span class="text-gabu-brass">カタチに。</span>
                     </h2>
                 </div>
 
-                <!-- Body Text -->
                 <div class="md:w-2/3 md:pl-20">
                     <p class="font-sans text-xs tracking-widest text-gabu-brass mb-8 font-medium reveal-on-scroll delay-100">ABOUT US</p>
                     
-                    <div class="space-y-12 font-jp font-medium text-lg md:text-2xl leading-loose tracking-wider text-justify md:text-left text-gabu-text">
-                        <p class="reveal-on-scroll delay-200">
-                            個性・感性・創造性を発揮し、<br>
-                            組織力で挑戦。
+                    <div class="space-y-12 font-jp font-medium text-justify md:text-left text-gabu-text">
+                        <p class="text-lg md:text-[1.75rem] font-bold tracking-[0.1em] md:tracking-[0.15em] text-gabu-text reveal-on-scroll delay-200">
+                            個性・感性・創造性を発揮し、組織力で挑戦する。
                         </p>
                         <p class="text-sm md:text-base text-gabu-text-light leading-loose font-normal reveal-on-scroll delay-300">
-                            不動産という「形ある資産」を扱う私たちに<br>
-決まった正解はありません。<br>
-だからこそ、ひとりひとりの個性を尊重し<br>
-磨き上げられた感性を大切にしています。<br>
-<br>
-常識にとらわれない創造性を解き放ち<br>
-お客様の潜在的なニーズを具現化すること。<br>
-そして、困難な課題にも果敢に挑戦し続けること。<br>
-<br>
-私たちは、単なる物件の仲介や管理に留まらず<br>
-不動産の新たな価値を創造するパートナーとして<br>
-豊かな未来をデザインします。<br>
-                            <br>
-                            <br>
-                            <br>
-代表取締役　篠原 三樹博
+                            不動産という「形ある資産」を扱う私たちに<br><br>決まった正解はありません。<br><br>だからこそ、ひとりひとりの個性を尊重し<br><br>磨き上げられた感性を大切にしています。<br><br><br><br>常識にとらわれない創造性を解き放ち<br><br>お客様の潜在的なニーズを具現化すること。<br><br>そして、困難な課題にも果敢に挑戦し続けること。<br><br><br><br>私たちは、単なる物件の仲介や管理に留まらず<br><br>不動産の新たな価値を創造するパートナーとして<br><br>豊かな未来をデザインします。<br><br>                            <br><br>                            <br><br>                            <br><br>代表取締役　篠原 三樹博
                         </p>
                     </div>
                     
@@ -291,24 +245,19 @@
         </div>
     </section>
 
-    <!-- 1.5. SERVICE Section (New) -->
     <section class="bg-gabu-surface text-gabu-text py-32 px-6 border-b border-gabu-text/5">
         <div class="container mx-auto max-w-6xl">
-            <!-- Header -->
             <div class="flex flex-col md:flex-row justify-between items-end mb-20 border-b border-gabu-text/10 pb-6 reveal-on-scroll">
                 <div class="mb-4 md:mb-0">
                     <h3 class="font-sans text-3xl md:text-5xl tracking-widest uppercase text-gabu-text">SERVICE</h3>
                     <p class="font-jp text-sm text-gabu-text-light font-medium mt-2">事業内容</p>
                 </div>
                 <p class="font-jp text-xs md:text-sm text-gabu-text-light max-w-md text-right leading-loose">
-                    住まいと人をつなぎ、<br>
-                    価値ある時間を創出するための3つの柱。
+                    住まいと人をつなぎ、<br><br>                    価値ある時間を創出するための3つの柱。
                 </p>
             </div>
 
-            <!-- Services List -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Item 1 -->
                 <div class="group border-t border-gabu-text/20 pt-8 reveal-on-scroll delay-100">
                     <span class="font-sans text-xs text-gabu-brass tracking-widest mb-4 block">01</span>
                     <h4 class="font-jp text-xl md:text-2xl font-bold mb-4 group-hover:text-gabu-brass transition-colors duration-300">不動産仲介業</h4>
@@ -316,7 +265,6 @@
                         お客様の感性に響く物件との出会いをプロデュース。<br>売買・賃貸における最適なマッチングを実現します。
                     </p>
                 </div>
-                <!-- Item 2 -->
                 <div class="group border-t border-gabu-text/20 pt-8 reveal-on-scroll delay-200">
                     <span class="font-sans text-xs text-gabu-brass tracking-widest mb-4 block">02</span>
                     <h4 class="font-jp text-xl md:text-2xl font-bold mb-4 group-hover:text-gabu-brass transition-colors duration-300">不動産賃貸業</h4>
@@ -324,7 +272,6 @@
                         自社保有物件を通じた、上質な暮らしの提供。<br>住まう人のライフスタイルを彩る空間を創造します。
                     </p>
                 </div>
-                <!-- Item 3 -->
                 <div class="group border-t border-gabu-text/20 pt-8 reveal-on-scroll delay-300">
                     <span class="font-sans text-xs text-gabu-brass tracking-widest mb-4 block">03</span>
                     <h4 class="font-jp text-xl md:text-2xl font-bold mb-4 group-hover:text-gabu-brass transition-colors duration-300">賃貸不動産管理業</h4>
@@ -336,7 +283,6 @@
         </div>
     </section>
 
-    <!-- 2. NEWS Section -->
     <section class="bg-gabu-bg text-gabu-text py-24 px-6 border-b border-gabu-text/5">
         <div class="container mx-auto max-w-4xl">
             <div class="flex items-end justify-between mb-12 border-b border-gabu-text/20 pb-4 reveal-on-scroll">
@@ -362,7 +308,6 @@
         </div>
     </section>
 
-    <!-- 3. Real Estate (Projects) Section -->
     <section class="bg-gabu-surface py-32 px-6">
         <div class="container mx-auto max-w-6xl">
             <div class="mb-16 text-center reveal-on-scroll">
@@ -381,8 +326,7 @@
                         現在、準備中
                     </h4>
                     <p class="font-jp text-xs md:text-sm text-gabu-text-light leading-loose reveal-on-scroll delay-500">
-                        至高の空間をキュレーションしております。<br>
-                        公開まで今しばらくお待ちください。
+                        至高の空間をキュレーションしております。<br><br>                        公開まで今しばらくお待ちください。
                     </p>
                 </div>
                 
@@ -392,7 +336,6 @@
         </div>
     </section>
 
-    <!-- 4. CONTACT Section -->
     <section class="bg-gabu-bg py-32 px-6">
         <div class="container mx-auto max-w-3xl">
             <div class="mb-20 text-center reveal-on-scroll">
@@ -426,8 +369,7 @@
         </div>
     </section>
 
-    <!-- 5. Company Profile (Footer) -->
-    <footer class="bg-gabu-dark-bg text-gray-300 py-20 px-6 border-t border-white/5 font-sans">
+    <footer class="bg-gabu-dark-bg text-stone-300 py-20 px-6 border-t border-white/5 font-sans">
         <div class="container mx-auto max-w-5xl">
             
             <div class="mb-16 text-center md:text-left reveal-on-scroll">
@@ -439,45 +381,42 @@
                 <p class="text-xs text-gabu-brass uppercase tracking-widest">Company Profile</p>
             </div>
 
-            <div class="border-t border-gray-800 font-jp">
+            <div class="border-t border-stone-700/60 font-jp">
                 
-                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline reveal-on-scroll delay-100">
-                    <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">商号</div>
-                    <div class="md:col-span-9 text-sm text-gray-200 leading-relaxed font-medium">
-                        株式会社 GABU ORIENT<br>
-                        <span class="text-xs text-gray-500 font-sans mt-1 block tracking-wider">GABU ORIENT Inc.</span>
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-stone-700/60 py-6 items-baseline reveal-on-scroll delay-100">
+                    <div class="md:col-span-3 text-xs text-stone-400 tracking-widest uppercase font-sans mb-2 md:mb-0">商号</div>
+                    <div class="md:col-span-9 text-sm text-stone-200 leading-relaxed font-medium">
+                        株式会社 GABU ORIENT<br><br>                        <span class="text-xs text-stone-400 font-sans mt-1 block tracking-wider">GABU ORIENT Inc.</span>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline reveal-on-scroll delay-200">
-                    <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">設立</div>
-                    <div class="md:col-span-9 text-sm text-gray-200 font-medium">[ 2025年 4月 21日 ]</div>
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-stone-700/60 py-6 items-baseline reveal-on-scroll delay-200">
+                    <div class="md:col-span-3 text-xs text-stone-400 tracking-widest uppercase font-sans mb-2 md:mb-0">設立</div>
+                    <div class="md:col-span-9 text-sm text-stone-200 font-medium">[ 2025年 4月 21日 ]</div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline reveal-on-scroll delay-300">
-                    <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">資本金</div>
-                    <div class="md:col-span-9 text-sm text-gray-200 font-medium">[ 300万円 ]</div>
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-stone-700/60 py-6 items-baseline reveal-on-scroll delay-300">
+                    <div class="md:col-span-3 text-xs text-stone-400 tracking-widest uppercase font-sans mb-2 md:mb-0">資本金</div>
+                    <div class="md:col-span-9 text-sm text-stone-200 font-medium">[ 300万円 ]</div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline reveal-on-scroll delay-400">
-                    <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">本社</div>
-                    <div class="md:col-span-9 text-sm text-gray-200 leading-loose font-medium">
-                        〒812-0054<br>
-                        福岡市東区馬出1-24-31-102<br>
-                        <a href="https://www.google.com/maps/search/?api=1&query=福岡市東区馬出1-24-31-102" target="_blank" class="inline-flex items-center gap-2 mt-2 text-xs text-gabu-brass hover:text-white transition-colors font-sans tracking-wider border-b border-gabu-brass/50 pb-0.5">
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-stone-700/60 py-6 items-baseline reveal-on-scroll delay-400">
+                    <div class="md:col-span-3 text-xs text-stone-400 tracking-widest uppercase font-sans mb-2 md:mb-0">本社</div>
+                    <div class="md:col-span-9 text-sm text-stone-200 leading-loose font-medium">
+                        〒812-0054<br><br>                        福岡市東区馬出1-24-31-102<br><br>                        <a href="https://www.google.com/maps/search/?api=1&query=福岡市東区馬出1-24-31-102" target="_blank" class="inline-flex items-center gap-2 mt-2 text-xs text-gabu-brass hover:text-white transition-colors font-sans tracking-wider border-b border-gabu-brass/50 pb-0.5">
                             VIEW GOOGLE MAP
                         </a>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline reveal-on-scroll delay-500">
-                    <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">代表者</div>
-                    <div class="md:col-span-9 text-sm text-gray-200 font-medium">代表取締役　篠原 三樹博</div>
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-stone-700/60 py-6 items-baseline reveal-on-scroll delay-500">
+                    <div class="md:col-span-3 text-xs text-stone-400 tracking-widest uppercase font-sans mb-2 md:mb-0">代表者</div>
+                    <div class="md:col-span-9 text-sm text-stone-200 font-medium">代表取締役　篠原 三樹博</div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline reveal-on-scroll delay-700">
-                    <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">事業内容</div>
-                    <div class="md:col-span-9 text-sm text-gray-200 leading-loose font-medium">
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-stone-700/60 py-6 items-baseline reveal-on-scroll delay-700">
+                    <div class="md:col-span-3 text-xs text-stone-400 tracking-widest uppercase font-sans mb-2 md:mb-0">事業内容</div>
+                    <div class="md:col-span-9 text-sm text-stone-200 leading-loose font-medium">
                         <ul class="list-none space-y-1">
                             <li>不動産の売買・仲介</li>
                             <li>不動産の賃貸・仲介・管理</li>
@@ -488,29 +427,36 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline reveal-on-scroll delay-700">
-                    <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">許認可等</div>
-                    <div class="md:col-span-9 text-sm text-gray-200 font-medium">宅地建物取引業者免許 福岡県知事（1）第21024号</div>
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-stone-700/60 py-6 items-baseline reveal-on-scroll delay-700">
+                    <div class="md:col-span-3 text-xs text-stone-400 tracking-widest uppercase font-sans mb-2 md:mb-0">許認可等</div>
+                    <div class="md:col-span-9 text-sm text-stone-200 font-medium">
+                        <ul class="list-none space-y-2">
+                            <li>・宅地建物取引業免許 福岡県知事免許(1)第 21021 号</li>
+                            <li>・所属団体 (公社)福岡県宅地建物取引業協会</li>
+                            <li>・(社)九州不動産公正取引協議会加盟</li>
+                            <li>・保証協会 (公社)全国宅地建物取引業保証協会</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-gray-800 py-6 items-baseline reveal-on-scroll delay-700">
-                    <div class="md:col-span-3 text-xs text-gray-500 tracking-widest uppercase font-sans mb-2 md:mb-0">連絡先</div>
-                    <div class="md:col-span-9 text-sm text-gray-200 tracking-wide leading-loose font-medium">
+                <div class="grid grid-cols-1 md:grid-cols-12 border-b border-stone-700/60 py-6 items-baseline reveal-on-scroll delay-700">
+                    <div class="md:col-span-3 text-xs text-stone-400 tracking-widest uppercase font-sans mb-2 md:mb-0">連絡先</div>
+                    <div class="md:col-span-9 text-sm text-stone-200 tracking-wide leading-loose font-medium">
                         <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-8 mb-2">
-                            <div><span class="text-gray-500 mr-2 font-sans text-xs">Tel:</span><a href="tel:0925156178" class="hover:text-gabu-brass">092-515-6178</a></div>
-                            <div><span class="text-gray-500 mr-2 font-sans text-xs">Fax:</span>092-206-8029</div>
+                            <div><span class="text-stone-400 mr-2 font-sans text-xs">Tel:</span><a href="tel:0925156178" class="hover:text-gabu-brass">092-515-6178</a></div>
+                            <div><span class="text-stone-400 mr-2 font-sans text-xs">Fax:</span>092-206-8029</div>
                         </div>
                         <div>
-                            <span class="text-gray-500 mr-2 font-sans text-xs">Mail:</span>
-                            <a href="mailto:m.shinohara@gabu-orient.com" class="hover:text-gabu-brass border-b border-gray-700 hover:border-gabu-brass pb-0.5 break-all">m.shinohara@gabu-orient.com</a>
+                            <span class="text-stone-400 mr-2 font-sans text-xs">Mail:</span>
+                            <a href="mailto:m.shinohara@gabu-orient.com" class="hover:text-gabu-brass border-b border-stone-600 hover:border-gabu-brass pb-0.5 break-all">m.shinohara@gabu-orient.com</a>
                         </div>
                     </div>
                 </div>
 
             </div>
 
-            <div class="flex flex-col md:flex-row justify-between items-center pt-12 mt-12 text-[10px] tracking-widest uppercase text-gray-600 reveal-on-scroll delay-1000">
-                <p>&copy; 2026 GABU ORIENT Inc. All Rights Reserved.</p>
+            <div class="flex flex-col md:flex-row justify-between items-center pt-12 mt-12 text-[10px] tracking-widest uppercase text-stone-400 reveal-on-scroll delay-1000">
+                <p>© 2026 GABU ORIENT Inc. All Rights Reserved.</p>
                 <div class="flex gap-6 mt-4 md:mt-0">
                     <a href="#" class="hover:text-white transition-colors">ABOUT</a>
                     <a href="#" class="hover:text-white transition-colors">NEWS</a>
@@ -521,7 +467,6 @@
         </div>
     </footer>
 
-    <!-- Scroll Reveal Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const revealElements = document.querySelectorAll('.reveal-on-scroll');
@@ -548,20 +493,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
